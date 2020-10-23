@@ -14,10 +14,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+// import { LogInComponent } from './components/log-in/log-in.component';
+// import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // LogInComponent,
+    // SignUpComponent
   ],
   entryComponents: [],
   imports: [
@@ -33,6 +38,7 @@ import { CommonModule } from '@angular/common';
   providers: [
     StatusBar,
     SplashScreen,
+    NativeAudio,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
