@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+//////// Mis estilos
+
+ion-content{
+  --background: url('../../../assets/imagenes/fondoMaderaOsc.jpg') no-repeat center center / cover;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+

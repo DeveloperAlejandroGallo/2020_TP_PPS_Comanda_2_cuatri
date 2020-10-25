@@ -45,7 +45,7 @@ export class AppComponent {
 
   private setAndroidBackButtonBehavior(): void {
     this.platform.backButton.subscribe(() => {
-      if (window.location.pathname == "/log-and-sign")
+      if (window.location.pathname == "/login")
     {
         navigator['app'].exitApp();
       }
