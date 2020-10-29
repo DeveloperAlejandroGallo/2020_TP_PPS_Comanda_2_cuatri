@@ -15,11 +15,11 @@ import { AppModule } from 'src/app/app.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    AppModule
+    HomePageRoutingModule
   ],
+  exports:[NavbarComponent],
   declarations: [HomePage,
-    // NavbarComponent,
+    NavbarComponent,
     PerfilDuenioComponent]
 })
 export class HomePageModule {}

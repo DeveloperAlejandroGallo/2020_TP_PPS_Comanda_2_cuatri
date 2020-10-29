@@ -24,12 +24,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    // NavbarComponent
     // LogInComponent,
     // SignUpComponent
   ],
   entryComponents: [],
-  exports:[NavbarComponent],
+  // exports:[NavbarComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
