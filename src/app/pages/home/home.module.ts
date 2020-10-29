@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { PerfilDuenioComponent } from 'src/app/components/perfil-duenio/perfil-duenio.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { AppModule } from 'src/app/app.module';
 
 
 @NgModule({
@@ -14,8 +15,11 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    AppModule
   ],
-  declarations: [HomePage,NavbarComponent,PerfilDuenioComponent]
+  declarations: [HomePage,
+    // NavbarComponent,
+    PerfilDuenioComponent]
 })
 export class HomePageModule {}

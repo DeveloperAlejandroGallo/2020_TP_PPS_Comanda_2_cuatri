@@ -18,15 +18,18 @@ import { CommonModule } from '@angular/common';
 // Plugins
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent
     // LogInComponent,
     // SignUpComponent
   ],
   entryComponents: [],
+  exports:[NavbarComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

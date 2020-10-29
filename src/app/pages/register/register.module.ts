@@ -9,14 +9,18 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 import { RegisterPage } from './register.page';
 import { SignUpComponent } from 'src/app/components/sign-up/sign-up.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { AppModule } from 'src/app/app.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule
+    RegisterPageRoutingModule,
+    AppModule
   ],
-  declarations: [RegisterPage,NavbarComponent, SignUpComponent]
+  declarations: [RegisterPage,
+    // NavbarComponent, 
+    SignUpComponent]
 })
 export class RegisterPageModule {}
