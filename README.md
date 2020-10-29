@@ -16,7 +16,7 @@ Milagros Pielvitori
 
 
 ## **Detalles de la construcción** 🛠️
-### Semana 1: Sábado 17/10 al 24/10
+### Semana 1: Sábado 17/10 al 24/10 💻
 >**Alejandro Gallo**
 >* Splash animado.
 >
@@ -26,7 +26,7 @@ Milagros Pielvitori
 >**Milagros Pielvitori**
 >* Diseño de ícono.
 
-### Semana 2: Sábado 24/10 al 31/10
+### Semana 2: Sábado 24/10 al 31/10 💻
 >**Alejandro Gallo**
 >* Diseño de perfiles para los distintos usuarios.
 >
@@ -36,7 +36,7 @@ Milagros Pielvitori
 >**Milagros Pielvitori**
 >* Definición de funcionalidades por perfil y pantalla de registro genérica.
 
-### Semana 3: Sábado 31/10 al 07/10
+### Semana 3: Sábado 31/10 al 07/10 💻
 >**Alejandro Gallo**
 >* Agrega QR para lectura de DNI en alta de dueño.
 >* Agrega QR para lectura de DNI en alta de supervisor.
