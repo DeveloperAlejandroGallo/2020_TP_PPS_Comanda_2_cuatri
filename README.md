@@ -18,33 +18,33 @@ Milagros Pielvitori
 ## **Detalles de la construcción** 🛠️
 ### Semana 1: Sábado 17/10 al 24/10
 **Alejandro Gallo**
->Splash animado
+>Splash animado.
 
 **Matías Paverini**
->Configuración de base de datos para abordar el proyecto
+>Configuración de base de datos para abordar el proyecto.
 
 **Milagros Pielvitori**
->Diseño de ícono
+>Diseño de ícono.
 
 ### Semana 2: Sábado 24/10 al 31/10
 **Alejandro Gallo**
->Diseño de perfiles para los distintos usuarios
+>Diseño de perfiles para los distintos usuarios.
 
 **Matías Paverini**
->Pantalla de ingreso a la aplicación
+>Pantalla de ingreso a la aplicación.
 
 **Milagros Pielvitori**
->Definición de funcionalidades por perfil y pantalla de registro genérica
+>Definición de funcionalidades por perfil y pantalla de registro genérica.
 
 ### Semana 3: Sábado 31/10 al 07/10
 **Alejandro Gallo**
->Agrega QR para lectura de DNI en alta de dueño
->Agrega QR para lectura de DNI en alta de supervisor
+>Agrega QR para lectura de DNI en alta de dueño.
+>Agrega QR para lectura de DNI en alta de supervisor.
 
 **Matías Paverini**
->Agrega QR para lectura de DNI en alta de cliente
->Agrega filtro para tipo de clientes
+>Agrega QR para lectura de DNI en alta de cliente.
+>Agrega filtro para tipo de clientes.
 
 **Milagros Pielvitori**
->Agrega QR para lectura de DNI en alta de empleado
->Agrega filtro para tipo de empleados
+>Agrega QR para lectura de DNI en alta de empleado.
+>Agrega filtro para tipo de empleados.
