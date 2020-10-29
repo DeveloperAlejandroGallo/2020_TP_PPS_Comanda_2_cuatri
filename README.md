@@ -38,13 +38,13 @@ Milagros Pielvitori
 
 ### Semana 3: Sábado 31/10 al 07/10
 **Alejandro Gallo**
->Agrega QR para lectura de DNI en alta de dueño.
->Agrega QR para lectura de DNI en alta de supervisor.
+>* Agrega QR para lectura de DNI en alta de dueño.
+>* Agrega QR para lectura de DNI en alta de supervisor.
 
 **Matías Paverini**
->Agrega QR para lectura de DNI en alta de cliente.
->Agrega filtro para tipo de clientes.
+>* Agrega QR para lectura de DNI en alta de cliente.
+>* Agrega filtro para tipo de clientes.
 
 **Milagros Pielvitori**
->Agrega QR para lectura de DNI en alta de empleado.
->Agrega filtro para tipo de empleados.
+>* Agrega QR para lectura de DNI en alta de empleado.
+>* Agrega filtro para tipo de empleados.
