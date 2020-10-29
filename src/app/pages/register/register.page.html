@@ -1,0 +1,22 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+
+
+<ion-header [translucent]="true" class="header">
+
+  <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" [pagina]="this.pagina"></app-navbar>
+
+</ion-header>
+
+<ion-content>
+  
+  <app-sign-up [perfilAlta]="this.perfilAlta"></app-sign-up>
+
+</ion-content>

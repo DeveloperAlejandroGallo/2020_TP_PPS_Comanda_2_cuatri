@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { PerfilDuenioComponent } from 'src/app/components/perfil-duenio/perfil-duenio.component';
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 
 @NgModule({
@@ -15,6 +16,6 @@ import { PerfilDuenioComponent } from 'src/app/components/perfil-duenio/perfil-d
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage,PerfilDuenioComponent]
+  declarations: [HomePage,NavbarComponent,PerfilDuenioComponent]
 })
 export class HomePageModule {}

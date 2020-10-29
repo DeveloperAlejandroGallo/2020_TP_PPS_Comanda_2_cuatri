@@ -14,9 +14,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+// Plugins
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
-// import { LogInComponent } from './components/log-in/log-in.component';
-// import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     StatusBar,
     SplashScreen,
     NativeAudio,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

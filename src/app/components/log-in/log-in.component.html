@@ -1,6 +1,6 @@
 <body class="centrado">
 
-  <div [hidden]="usuarioActivo">
+  <div *ngIf="!usuarioActivo">
 
     <div id="container">
       <form>
@@ -39,7 +39,7 @@
         </ion-card>
 
       </form>
-      <ion-card [hidden]="!mostrar" class="error">
+      <ion-card *ngIf="mostrar" class="error">
         <ion-card-header>
           <ion-title class="titulo">Error</ion-title>
         </ion-card-header>

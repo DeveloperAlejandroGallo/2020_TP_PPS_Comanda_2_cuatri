@@ -7,7 +7,7 @@
 </ion-header> -->
 
 <ion-header [translucent]="true" class="header">
-  <ion-toolbar color="light">
+  <!-- <ion-toolbar color="light">
       <ion-buttons slot="secondary">
           <ion-button (click)="salir()">
             <ion-icon name="log-out"></ion-icon>
@@ -17,7 +17,10 @@
               <ion-menu-button menu="first"></ion-menu-button>
           </ion-buttons>
       <ion-title class="capitalize"><strong>{{perfilUsuarioActivo}}</strong></ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+
+  <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" [pagina]="this.pagina"></app-navbar>
+
 </ion-header>
 
 
@@ -25,7 +28,7 @@
 
 
 <div *ngIf="perfilUsuarioActivo == 'Dueño'">
-  <app-perfil-duenio></app-perfil-duenio>
+  <app-perfil-duenio (perfilRegistrar)="recibirPerfilRegistrar($event)"></app-perfil-duenio>
 
 </div>
 
