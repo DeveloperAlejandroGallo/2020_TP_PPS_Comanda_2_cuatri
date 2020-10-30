@@ -49,7 +49,8 @@ export class SignUpComponent implements OnInit {
     
   optionsCamera: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
-    destinationType: this.camera.DestinationType.DATA_URL
+    destinationType: this.camera.DestinationType.DATA_URL,
+    correctOrientation: true
   }
 
 
