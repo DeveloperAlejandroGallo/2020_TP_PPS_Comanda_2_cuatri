@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthenticationService } from 'src/app/servicios/authentication.service';
 import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FirestoreService } from 'src/app/servicios/firestore.service';
 
 import { ToastController } from '@ionic/angular';
@@ -38,10 +39,19 @@ export class SignUpComponent implements OnInit {
   public datoLeido;
   public formatoLeido;
 
+  public imagenCargada;
+
   // public tipoEmpleados=['Mozo','Cocinero','Bartender'];
   // public tipoClientes=['Anonimo','Registrado'];
 
   types = ["PDF417", "QR Code"];
+
+    
+  optionsCamera: CameraOptions = {
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    destinationType: this.camera.DestinationType.DATA_URL
+  }
+
 
   @Input() perfilAlta:string;
 
@@ -51,7 +61,8 @@ export class SignUpComponent implements OnInit {
     private auth:AuthenticationService,
     private firestore:FirestoreService,
     private escaner:BarcodeScanner,
-    public toastController: ToastController) {
+    public toastController: ToastController,
+    private camera:Camera) {
 
       
 
@@ -75,6 +86,8 @@ export class SignUpComponent implements OnInit {
       this.tipo='Anonimo';
       else
       this.tipo='';
+
+      this.imagenCargada="../../../assets/imagenes/whoAmI.png";
   }
 
 
@@ -152,6 +165,26 @@ export class SignUpComponent implements OnInit {
 
 
   }
+
+
+  tomarFoto(){
+    this.camera.getPicture(this.optionsCamera).then((imageData) => {
+
+      this.imagenCargada = 'data:image/jpeg;base64,' + imageData;
+
+      // if(imageData !== 'No Image Selected'){
+      //   this.imagenesParaCargar.push(this.imagenCargada);
+      //   // this.guardarFoto(this.imageURL);
+      // }else{
+      // }
+      // console.log(this.imageURL);
+    }).catch((err) => {
+      console.log(err);
+
+    });
+  }
+
+
 
 
 

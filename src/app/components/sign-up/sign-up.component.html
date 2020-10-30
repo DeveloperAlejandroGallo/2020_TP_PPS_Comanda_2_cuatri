@@ -9,6 +9,10 @@
         <ion-card-content>
 
           <div class="form-group row">
+            <img src="{{imagenCargada}}" alt="foto-de-perfil" width="50%" (click)="tomarFoto()">
+          </div>
+
+          <div class="form-group row">
             <ion-item style="margin-bottom: 3%;">
               <ion-icon name="person-circle-outline" slot="start"></ion-icon>
               <ion-input type="text" class="form-control" placeholder="Ingrese nombre"
