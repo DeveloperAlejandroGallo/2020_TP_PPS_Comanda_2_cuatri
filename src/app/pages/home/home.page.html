@@ -27,11 +27,25 @@
 <ion-content [fullscreen]="true">
 
 
-<div *ngIf="perfilUsuarioActivo == 'Dueño'">
+<div *ngIf="perfilUsuarioActivo == 'duenio'">
   <app-perfil-duenio (perfilRegistrar)="recibirPerfilRegistrar($event)"></app-perfil-duenio>
 
 </div>
 
+<div *ngIf="perfilUsuarioActivo == 'cliente'">
+  <app-perfil-cliente></app-perfil-cliente>
+
+</div>
+
+<div *ngIf="perfilUsuarioActivo == 'supervisor'">
+  <app-perfil-supervisor></app-perfil-supervisor>
+
+</div>
+
+<div *ngIf="perfilUsuarioActivo == 'empleado'">
+  <app-perfil-empleado></app-perfil-empleado>
+
+</div>
 
 
 

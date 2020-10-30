@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   public usuarioActivo=false;
   public listadoUsuarios;
   public perfilUsuarioActivo;
+  public perfilUsuarioActivoMostrar;
 
   public ucorreoActivo;
 
@@ -34,7 +35,8 @@ export class NavbarComponent implements OnInit {
           for (let index = 0; index < this.listadoUsuarios.length; index++) {
             const element = this.listadoUsuarios[index];
             if(element.payload.doc.data().correo == this.ucorreoActivo){
-              this.perfilUsuarioActivo = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
+              this.perfilUsuarioActivo = element.payload.doc.data().perfil;
+              this.perfilUsuarioActivoMostrar = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
               this.emitirPerfil(this.perfilUsuarioActivo);
             }
           }

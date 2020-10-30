@@ -18,9 +18,8 @@ export class SignUpComponent implements OnInit {
 
   public usuarioActivo;
 
-  public perfil="";    // VER COMO TRATAR ESTA VARIABLE MAS ADELANTE
+
   public tipo;
-  public foto="";
 
   public mostrarMensaje=false;
   public mostrarError=false;
@@ -46,12 +45,20 @@ export class SignUpComponent implements OnInit {
 
   types = ["PDF417", "QR Code"];
 
-    
   optionsCamera: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
     correctOrientation: true
   }
+  
+  options: BarcodeScannerOptions = {
+    //prompt : "Escaneando", // Android
+    resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+    formats : "PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+    orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+    disableAnimations : true, // iOS
+    disableSuccessBeep: false // iOS and Android
+  };
 
 
   @Input() perfilAlta:string;
@@ -65,20 +72,8 @@ export class SignUpComponent implements OnInit {
     public toastController: ToastController,
     private camera:Camera) {
 
-      
 
-      
-      
     }
-    
-    options: BarcodeScannerOptions = {
-      //prompt : "Escaneando", // Android
-      resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
-      formats : "PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-      orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
-      disableAnimations : true, // iOS
-      disableSuccessBeep: false // iOS and Android
-    };
     
     ngOnInit() {
       if(this.perfilAlta=='empleado')
@@ -95,12 +90,14 @@ export class SignUpComponent implements OnInit {
   validarRegistro(){
     if(this.nombre != null && this.apellido != null &&
       this.dni != null && this.usuario != null &&
-      this.clave != null && this.claveDos != null){
+      this.clave != null && this.claveDos != null &&
+      this.sexo != null && this.perfilAlta != null &&
+      this.cuil != null){
 
         if(this.dni > 9999999 && this.dni < 99999999){
 
           if(this.clave == this.claveDos){
-            let user = new Usuario(this.nombre,this.apellido,this.dni,this.sexo,this.usuario,this.perfil,this.tipo,null,this.cuil,this.foto);
+            let user = new Usuario(this.nombre,this.apellido,this.dni,this.sexo,this.usuario,this.perfilAlta,this.tipo,null,this.cuil,this.imagenCargada);
 
             this.firestore.saveUser(user.toJson()).then(resp=>{
               this.auth.registrarCuenta(this.usuario,this.clave).then(res=>{
@@ -193,6 +190,7 @@ export class SignUpComponent implements OnInit {
  escanear(){
   
   this.escaner.scan(this.options).then(barcodeData =>{
+    //nroTramite@apellido@nombre@sexo F o M@dni@ejemplar@fecNac@fecVencimiento@xxx cuil (si lo tiene)
     this.datoLeido = barcodeData.text;
     this.formatoLeido = barcodeData.format;
     let probando = this.datoLeido.split('@');

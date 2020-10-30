@@ -12,6 +12,8 @@
             <img src="{{imagenCargada}}" alt="foto-de-perfil" width="50%" (click)="tomarFoto()">
           </div>
 
+          <p>{{datoLeido}}</p>
+
           <div class="form-group row">
             <ion-item style="margin-bottom: 3%;">
               <ion-icon name="person-circle-outline" slot="start"></ion-icon>
@@ -70,20 +72,25 @@
             <!-- AGREGAR TIPO SI CORRESPONDE -->
             <ion-item *ngIf="perfilAlta=='empleado'"  style="margin-bottom: 3%;">
               <ion-icon name="folder-outline" slot="start"></ion-icon>
-              <ion-label>Tipo de usuario</ion-label>
+              <ion-label>Tipo de Empleado</ion-label>
               <ion-select value="Mozo" interface="action-sheet" name="tipoEmpleado" id="tipoEmpleado" [(ngModel)]="tipo">
                 <ion-select-option (click)="setType('Mozo')" value="Mozo">Mozo</ion-select-option>
                 <ion-select-option (click)="setType('Cocinero')" value="Cocinero">Cocinero</ion-select-option>
                 <ion-select-option (click)="setType('Bartender')" value="Bartender">Bartender</ion-select-option>
               </ion-select>
-              
-              <!-- <ion-icon name="folder-outline" slot="start"></ion-icon>
-              <ion-label>Tipo de usuario</ion-label>
-              <ion-select value="Mozo" interface="action-sheet" name="tipoEmpleado" id="tipoEmpleado" [(ngModel)]="tipo">
-                <ion-select-option *ngFor="let item of tipoEmpleados" [value]=item>{{item}}</ion-select-option>
-              </ion-select> -->
             </ion-item>
-
+            
+            <ion-item *ngIf="perfilAlta=='cliente'"  style="margin-bottom: 3%;">
+              <ion-icon name="folder-outline" slot="start"></ion-icon>
+              <ion-label>Tipo de Cliente</ion-label>
+              <ion-select value="Mozo" interface="action-sheet" name="tipoCliente" id="tipoCliente" [(ngModel)]="tipo">
+                <ion-select-option (click)="setType('Mozo')" value="Mozo">Anónimo</ion-select-option>
+                <ion-select-option (click)="setType('Cocinero')" value="Cocinero">Registrado</ion-select-option>
+              </ion-select>
+            </ion-item>
+          
+          
+          
             <!-- <ion-item *ngIf="perfilAlta=='cliente'"  style="margin-bottom: 3%;">
               <ion-icon name="folder-outline" slot="start"></ion-icon>
               <ion-label>Tipo de usuario</ion-label>
@@ -91,17 +98,6 @@
                 <ion-select-option *ngFor="let item of tipoClientes" [value]=item>{{item}}</ion-select-option>
               </ion-select>
             </ion-item> -->
-
-            <!-- AGREGAR FOTO SI CORRESPONDE -->
-
-
-          <!-- <div class="form-group row">
-            <ion-item style="margin-bottom: 3%; margin-top: 3%;">
-              <ion-icon name="folder-outline" slot="start"></ion-icon>
-              <ion-input type="email" class="form-control" placeholder="Seleccione el tipo de usuario"
-                [(ngModel)]="tipo" name="tipo"></ion-input>
-            </ion-item>
-          </div> -->
 
 
           <div class="form-group row">

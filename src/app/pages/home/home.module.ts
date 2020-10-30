@@ -8,6 +8,9 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { PerfilDuenioComponent } from 'src/app/components/perfil-duenio/perfil-duenio.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { AppModule } from 'src/app/app.module';
+import { PerfilClienteComponent } from 'src/app/components/perfil-cliente/perfil-cliente.component';
+import { PerfilSupervisorComponent } from 'src/app/components/perfil-supervisor/perfil-supervisor.component';
+import { PerfilEmpleadoComponent } from 'src/app/components/perfil-empleado/perfil-empleado.component';
 
 
 @NgModule({
@@ -17,9 +20,12 @@ import { AppModule } from 'src/app/app.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  exports:[NavbarComponent],
+  exports: [NavbarComponent],
   declarations: [HomePage,
     NavbarComponent,
-    PerfilDuenioComponent]
+    PerfilDuenioComponent,
+    PerfilClienteComponent,
+    PerfilSupervisorComponent,
+    PerfilEmpleadoComponent]
 })
-export class HomePageModule {}
+export class HomePageModule { }
