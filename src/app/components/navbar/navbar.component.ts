@@ -35,8 +35,11 @@ export class NavbarComponent implements OnInit {
           for (let index = 0; index < this.listadoUsuarios.length; index++) {
             const element = this.listadoUsuarios[index];
             if(element.payload.doc.data().correo == this.ucorreoActivo){
+              this.perfilUsuarioActivoMostrar='';
+              this.perfilUsuarioActivo='';
               this.perfilUsuarioActivo = element.payload.doc.data().perfil;
               this.perfilUsuarioActivoMostrar = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
+              this.perfilUsuarioActivoMostrar = element.payload.doc.data().tipo != undefined? this.perfilUsuarioActivoMostrar+' '+element.payload.doc.data().tipo : this.perfilUsuarioActivoMostrar;
               this.emitirPerfil(this.perfilUsuarioActivo);
             }
           }
