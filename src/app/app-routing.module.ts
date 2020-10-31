@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  {path: 'splash',loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)},
   {path: '',redirectTo: 'splash',pathMatch: 'full'},
-  {path: 'home',loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  {path: 'home',loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),canActivate:[AuthGuard]},
+  {path: 'splash',loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)},
+  {path: 'login',loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)},
+  {
+    path: 'register/:perfil',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+
+
 
 
 
