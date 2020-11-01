@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/servicios/firestore.service';
 
 import { NumericValueAccessor, ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
+import { disableDebugTools } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sign-up',
@@ -200,6 +201,7 @@ export class SignUpComponent implements OnInit {
       this.datoLeido = barcodeData.text;
       this.formatoLeido = barcodeData.format;
       let dni = this.datoLeido.split('@');
+      // let dni = probandinQR.split('@');
 
       if (dni.length == 8 || dni.length == 9) {
         this.apellido = dni[1];
@@ -211,16 +213,10 @@ export class SignUpComponent implements OnInit {
         this.apellido = dni[4];
         this.nombre = dni[5];
         this.dni = dni[1];
-        if (dni[8] === 'M') {
-          this.sexo = 'Masculino';
-          // CUIT[1] = 0;
-        } else {
-          this.sexo = 'Femenino';
-          // CUIT[1] = 7;
-        }
-
+        this.sexo = dni[8] === 'M' ? 'Masculino' : this.sexo = 'Femenino';
+        this.cuil = this.calcularCUIT();
       }
-      if (this.cuil == null) {
+      if (this.cuil == (null || '' || undefined)) {
         Swal.fire({
           title: 'Atención',
           text: 'El DNI no contenía el número de CUIL. Ingreselo manualmente.',
@@ -229,12 +225,6 @@ export class SignUpComponent implements OnInit {
 
       }
 
-      // let digVerif: number;
-      // let CUIT: Array<number> = [2];
-
-
-
-      // this.calcularCUIT(CUIT, this.dni);
 
     }).catch(err => {
       console.log('Error', err);
@@ -244,14 +234,17 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  calcularCUIT(cuit: Array<number>, dni: string) {
-    if (dni.length < 8) {
-      cuit[2] = 0;
-    }
-    else
-      cuit[2] = Number.parseInt(dni[0]);
+  calcularCUIT(): string {
+    let dni = this.dni;
+    let cuit: Array<number> = [];
+    let cantCeros = 8 - dni.length;
+    let result: string;
+    cuit[0] = 2;
+    cuit[1] = this.sexo === 'Masculino' ? 0 : 7;
+    for (let i = 0; i < cantCeros; i++)
+      cuit.push(0);
 
-    for (let i = 1; i < dni.length; i++) {
+    for (let i = 0; i < dni.length; i++) {
       if (Number.parseInt(dni[i]) != NaN)
         cuit.push(Number.parseInt(dni[i]));
     }
@@ -282,10 +275,9 @@ export class SignUpComponent implements OnInit {
         break;
     }
     cuit[10] = digVer;
-    for (let i = 0; i < 11; i++)
-      this.cuil[i] = cuit[i];
-
-    console.log(this.cuil);
+    let ret: string = cuit.join('');
+    
+    return ret.substring(0,11);
   }
 
 
@@ -298,11 +290,6 @@ export class SignUpComponent implements OnInit {
     this.tipo = e;
     console.log(this.tipo);
   }
-
-
-
-
-
 
 
 }
