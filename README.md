@@ -12,8 +12,8 @@ Matias Paverini
 Milagros Pielvitori
 ```
 
-
-
+## **Nuestro Logo** ✒️
+![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icon.png)
 
 ## **Detalles de la construcción** 🛠️
 ### Semana 1: Sábado 17/10 al 24/10 💻
