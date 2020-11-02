@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Push } from "@ionic-native/push/ngx";
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     SplashScreen,
     NativeAudio,
     BarcodeScanner,
+    Push,
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

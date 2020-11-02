@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/servicios/authentication.service';
 import { FirestoreService } from 'src/app/servicios/firestore.service';
 import { NavController } from '@ionic/angular';
+import { PushNotificationsService } from "../../servicios/push-notifications.service";
 
 @Component({
   selector: 'app-home',
@@ -19,8 +20,12 @@ export class HomePage {
 
   // public ucorreoActivo;
 
+  public notificacion(perfil) {
+    this.push.enviarNotificacion(perfil);
+  }
 
-  constructor(private authService: AuthenticationService, private router:Router,private firestore:FirestoreService,private navCtrl: NavController) {
+
+  constructor(private authService: AuthenticationService, private router:Router,private firestore:FirestoreService,private navCtrl: NavController, private push: PushNotificationsService) {
     this.pagina="Inicio";
 
     // authService.currentUser().then(resp=>{
