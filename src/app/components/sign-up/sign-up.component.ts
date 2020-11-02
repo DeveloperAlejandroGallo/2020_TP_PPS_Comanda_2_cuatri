@@ -89,78 +89,106 @@ export class SignUpComponent implements OnInit {
 
 
   validarRegistro() {
-    if (this.nombre != null && this.apellido != null &&
-      this.dni != null && this.usuario != null &&
-      this.clave != null && this.claveDos != null &&
-      this.sexo != null && this.perfilAlta != null &&
-      this.cuil != null) {
+    this.mensaje = '';
 
-      if (this.dni > 9999999 && this.dni < 99999999) {
+    // if (this.nombre != null && this.apellido != null &&
+    //   this.dni != null && this.usuario != null &&
+    //   this.clave != null && this.claveDos != null &&
+    //   this.sexo != null && this.perfilAlta != null &&
+    //   this.cuil != null) {
 
-        if (this.clave == this.claveDos) {
-          let user = new Usuario(this.nombre, this.apellido, this.dni, this.sexo, this.usuario, this.perfilAlta, this.tipo, null, this.cuil, this.imagenCargada);
+    //   if (this.dni > 9999999 && this.dni < 99999999) {
 
-          this.firestore.saveUser(user.toJson()).then(resp => {
-            this.auth.registrarCuenta(this.usuario, this.clave).then(res => {
-              Swal.fire({
-                title: 'Éxito',
-                text: 'El usuario fue dado de alta correctamente',
-                icon: 'success'
-              }
-              ).then(result => {
-                this.router.navigate(['/home']);
-              });
-              // this.mostrarNotificacion(true,'El usuario fue dado de alta correctamente');
-            }).catch(error => {
-              console.log("rompio el authentication");
-              console.log(error);
-            });
+    // if (this.clave == this.claveDos) 
+    if (this.camposValidos()) {
+      let user = new Usuario(this.nombre, this.apellido, this.dni, this.sexo, this.usuario, this.perfilAlta, this.tipo, null, this.cuil, this.imagenCargada);
 
-          }).catch(err => {
-            console.log("FALLO la BD");
-            console.log(err);
-          });
-
-
-        } else {
+      this.auth.registrarCuenta(this.usuario, this.clave).then(res => {
+        this.firestore.saveUser(user.toJson()).then(resp => {
           Swal.fire({
-            title: 'Error',
-            text: 'Las claves no coinciden, reingresar.',
-            icon: 'error'
+            title: 'Éxito',
+            text: 'El usuario fue dado de alta correctamente',
+            icon: 'success'
           }
           ).then(result => {
-            this.clave = null;
-            this.claveDos = null;
+            this.router.navigate(['/home']);
           });
-          // this.tituloMensaje="Error";
-          // this.mostrarNotificacion(false,'Las claves no coinciden, reingresar.',1);
+          // this.mostrarNotificacion(true,'El usuario fue dado de alta correctamente');
+        }).catch(err => {
+          console.log("FALLO la BD");
+          console.log(err);
+        });
+      }).catch(error => {
+        console.log("rompio el authentication");
+        console.log(error);
+        switch (error.code) {
+          case 'auth/weak-password':
+            this.mensaje = 'La clave debe poseer al menos 6 caracteres';
+            break;
+          case 'auth/email-already-in-use':
+            this.mensaje = 'Correo ya registrado';
+            break;
+          case 'auth/invalid-email':
+            this.mensaje = 'Correo con formato inv\u00E1lido';
+            break;
+          case 'auth/argument-error':
+            if (error.message == 'createUserWithEmailAndPassword failed: First argument "email" must be a valid string.')
+              this.mensaje = 'Correo con debe ser una cadena v\u00E1lida';
+            else
+              this.mensaje = 'La constrase\u00F1a debe ser una cadena v\u00E1lida';
+            break;
+          case 'auth/argument-error':
+            this.mensaje = 'Correo con debe ser una cadena v\u00E1lida';
+            break;
+          default:
+            this.mensaje = 'Error en registro';
         }
-
-      } else {
         Swal.fire({
           title: 'Error',
-          text: 'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',
+          text: this.mensaje,
           icon: 'error'
-        }
-        ).then(result => {
-          this.dni = null;
-        });
-        // this.tituloMensaje="Error";
-        // this.mostrarNotificacion(false,'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',2);
-      }
+        })
+      });
+
 
     } else {
+      console.log('Error Aca');
       Swal.fire({
         title: 'Error',
-        text: 'Falta ingresar datos, verificar',
+        text: this.mensaje,
         icon: 'error'
       }
-      )
+      ).then(result => {
+        console.log(this.mensaje);
+      });
       // this.tituloMensaje="Error";
-      // this.mensaje="Falta ingresar datos, verificar";
-      // this.presentToastWithOptions();
-      // this.mostrarNotificacion(false,'Falta ingresar datos, verificar',3);
+      // this.mostrarNotificacion(false,'Las claves no coinciden, reingresar.',1);
     }
+
+    //   } else {
+    //     Swal.fire({
+    //       title: 'Error',
+    //       text: 'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',
+    //       icon: 'error'
+    //     }
+    //     ).then(result => {
+    //       this.dni = null;
+    //     });
+    //     // this.tituloMensaje="Error";
+    //     // this.mostrarNotificacion(false,'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',2);
+    //   }
+
+    // } else {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'Falta ingresar datos, verificar',
+    //     icon: 'error'
+    //   })
+    //   // this.tituloMensaje="Error";
+    //   // this.mensaje="Falta ingresar datos, verificar";
+    //   // this.presentToastWithOptions();
+    //   // this.mostrarNotificacion(false,'Falta ingresar datos, verificar',3);
+    // }
 
 
   }
@@ -276,8 +304,8 @@ export class SignUpComponent implements OnInit {
     }
     cuit[10] = digVer;
     let ret: string = cuit.join('');
-    
-    return ret.substring(0,11);
+
+    return ret.substring(0, 11);
   }
 
 
@@ -291,5 +319,61 @@ export class SignUpComponent implements OnInit {
     console.log(this.tipo);
   }
 
+  private camposValidos() {
+    let nombre: string = this.nombre;
+    if (this.nombre == (null || '' || undefined) || nombre.length == 0) {
+      this.mensaje = 'Debe completar el nombre';
+      return false;
+    }
+    let apellido: string = this.apellido;
+    if (this.apellido == (null || '' || undefined) || apellido.length == 0) {
+      this.mensaje = 'Debe completar el apellido';
+      return false;
+    }
+    let dni: string = this.dni;
+    if (this.dni == (null || '' || undefined) || dni.length == 0) {
+      this.mensaje = 'Debe completar el DNI';
+      return false;
+    }
+    if (this.dni < 1000000 || this.dni > 99999999) {
+      this.mensaje = 'Debe ingresar un DNI mayor a 1.000.000 y menor a 99.999.999';
+      return false;
+    }
+    if (isNaN(this.dni)) {
+      this.mensaje = 'Debe ingresar un DNI num\u00E9rico';
+      return false;
+    }
+    let cuil: string = this.cuil;
+    if (this.cuil == (null || '' || undefined) || cuil.length == 0) {
+      this.mensaje = 'Debe completar el CUIL';
+      return false;
+    }
+    let email: string = this.usuario;
+    if (this.usuario == (null || '' || undefined) || email.length == 0) {
+      this.mensaje = 'Debe completar el email';
+      return false;
+    }
+    let clave1: string = this.clave;
+    if (this.clave == (null || '' || undefined) || clave1.length == 0) {
+      this.mensaje = 'Debe completar la clave';
+      return false;
+    }
+    let clave2: string = this.claveDos;
+    if (this.claveDos == (null || '' || undefined) || clave2.length == 0) {
+      this.mensaje = 'Debe completar la confirmaci\u00F3n de la clave';
+      return false;
+    }
+    if (this.clave != this.claveDos) {
+      this.mensaje = 'Las claves son distintas';
+      return false;
+    }
+    if (this.sexo == (null || '' || undefined)) {
+      this.mensaje = 'Debe seleccionar un sexo';
+      return false;
+    }
+
+    return true;
+
+  }
 
 }

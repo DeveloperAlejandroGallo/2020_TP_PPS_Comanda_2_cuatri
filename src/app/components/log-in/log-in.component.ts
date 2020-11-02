@@ -77,9 +77,6 @@ export class LogInComponent implements OnInit {
 
 
 
-
-
-
   validarUsuario() {
 
     let esCliente = this.usuariosClientes.filter(user => user.correo == this.usuario);
@@ -128,7 +125,9 @@ export class LogInComponent implements OnInit {
   }
 
 
-
+  registrarUsuario() {
+    this.router.navigate(['/register/']);
+  }
 
 
 
