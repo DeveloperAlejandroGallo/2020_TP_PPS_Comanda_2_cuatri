@@ -17,10 +17,8 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.perfilAlta = this.route.snapshot.paramMap.get('perfil');
     let perfilAux = this.perfilAlta == 'duenio' ? 'Dueño' :this.perfilAlta;
-
-    perfilAux = this.perfilAlta == '' ? 'Nuevo Usuario' : this.perfilAlta;
-
     this.pagina = "Alta de " + perfilAux;
+    
   }
 
   recibirPerfil(e){

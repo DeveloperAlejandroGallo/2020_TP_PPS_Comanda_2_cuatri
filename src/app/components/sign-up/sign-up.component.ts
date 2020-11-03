@@ -9,6 +9,8 @@ import { FirestoreService } from 'src/app/servicios/firestore.service';
 import { NumericValueAccessor, ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { disableDebugTools } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-sign-up',
@@ -40,6 +42,7 @@ export class SignUpComponent implements OnInit {
   public formatoLeido;
 
   public imagenCargada;
+  public nick: string;
 
   // public tipoEmpleados=['Mozo','Cocinero','Bartender'];
   // public tipoClientes=['Anonimo','Registrado'];
@@ -83,7 +86,7 @@ export class SignUpComponent implements OnInit {
       this.tipo = 'Anonimo';
     else
       this.tipo = '';
-
+    console.log(this.perfilAlta + ' - ' + this.tipo);
     this.imagenCargada = "../../../assets/imagenes/whoAmI.png";
   }
 
@@ -91,19 +94,25 @@ export class SignUpComponent implements OnInit {
   validarRegistro() {
     this.mensaje = '';
 
-    // if (this.nombre != null && this.apellido != null &&
-    //   this.dni != null && this.usuario != null &&
-    //   this.clave != null && this.claveDos != null &&
-    //   this.sexo != null && this.perfilAlta != null &&
-    //   this.cuil != null) {
 
-    //   if (this.dni > 9999999 && this.dni < 99999999) {
-
-    // if (this.clave == this.claveDos) 
     if (this.camposValidos()) {
-      let user = new Usuario(this.nombre, this.apellido, this.dni, this.sexo, this.usuario, this.perfilAlta, this.tipo, null, this.cuil, this.imagenCargada);
+      
+      let user; 
+      if (this.tipo != 'anonimo')
+        user = new Usuario(this.nombre, this.apellido, this.dni, this.sexo, this.usuario, this.perfilAlta, this.tipo, null, this.cuil, this.imagenCargada);
+      else {
+        
+        this.nick = this.nick.toLowerCase();
+        this.clave = this.nombre = this.apellido = this.nick ;
+        this.usuario = this.nick+'@anonimo.com'
+        user = new Usuario(this.nombre, this.apellido, null, null, this.usuario, this.perfilAlta, this.tipo, null, null, this.imagenCargada)
+        
+      }
 
       this.auth.registrarCuenta(this.usuario, this.clave).then(res => {
+        if (this.tipo != 'anonimo')
+          res.user.sendEmailVerification({ handleCodeInApp: true, url: environment.urlVerify });
+
         this.firestore.saveUser(user.toJson()).then(resp => {
           Swal.fire({
             title: 'Ã‰xito',
@@ -123,22 +132,22 @@ export class SignUpComponent implements OnInit {
         console.log(error);
         switch (error.code) {
           case 'auth/weak-password':
-            this.mensaje = 'La clave debe poseer al menos 6 caracteres';
+            this.mensaje = this.tipo != 'anonimo' ? 'La clave debe poseer al menos 6 caracteres' : 'El usuario debe tener al menos 6 caracteres';
             break;
           case 'auth/email-already-in-use':
-            this.mensaje = 'Correo ya registrado';
+            this.mensaje = this.tipo != 'anonimo' ? 'Correo ya registrado' : 'El nombre de usuario ya está siendo utilizado.';
             break;
           case 'auth/invalid-email':
-            this.mensaje = 'Correo con formato inv\u00E1lido';
+            this.mensaje = this.tipo != 'anonimo' ? 'Correo con formato inv\u00E1lido' : 'El nombre de usaurio elegido no es v\u00E1lido';
             break;
           case 'auth/argument-error':
             if (error.message == 'createUserWithEmailAndPassword failed: First argument "email" must be a valid string.')
-              this.mensaje = 'Correo con debe ser una cadena v\u00E1lida';
+              this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
             else
-              this.mensaje = 'La constrase\u00F1a debe ser una cadena v\u00E1lida';
+              this.mensaje = this.tipo != 'anonimo' ? 'La constrase\u00F1a debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
             break;
           case 'auth/argument-error':
-            this.mensaje = 'Correo con debe ser una cadena v\u00E1lida';
+            this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
             break;
           default:
             this.mensaje = 'Error en registro';
@@ -161,34 +170,8 @@ export class SignUpComponent implements OnInit {
       ).then(result => {
         console.log(this.mensaje);
       });
-      // this.tituloMensaje="Error";
-      // this.mostrarNotificacion(false,'Las claves no coinciden, reingresar.',1);
+
     }
-
-    //   } else {
-    //     Swal.fire({
-    //       title: 'Error',
-    //       text: 'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',
-    //       icon: 'error'
-    //     }
-    //     ).then(result => {
-    //       this.dni = null;
-    //     });
-    //     // this.tituloMensaje="Error";
-    //     // this.mostrarNotificacion(false,'El dni es incorrecto. Revisar el formato (entre 10000000 y 99999999)',2);
-    //   }
-
-    // } else {
-    //   Swal.fire({
-    //     title: 'Error',
-    //     text: 'Falta ingresar datos, verificar',
-    //     icon: 'error'
-    //   })
-    //   // this.tituloMensaje="Error";
-    //   // this.mensaje="Falta ingresar datos, verificar";
-    //   // this.presentToastWithOptions();
-    //   // this.mostrarNotificacion(false,'Falta ingresar datos, verificar',3);
-    // }
 
 
   }
@@ -320,58 +303,66 @@ export class SignUpComponent implements OnInit {
   }
 
   private camposValidos() {
-    let nombre: string = this.nombre;
-    if (this.nombre == (null || '' || undefined) || nombre.length == 0) {
-      this.mensaje = 'Debe completar el nombre';
-      return false;
+    if (this.tipo != 'anonimo') {
+      let nombre: string = this.nombre;
+      if (this.nombre == (null || '' || undefined) || nombre.length == 0) {
+        this.mensaje = 'Debe completar el nombre';
+        return false;
+      }
+      let apellido: string = this.apellido;
+      if (this.apellido == (null || '' || undefined) || apellido.length == 0) {
+        this.mensaje = 'Debe completar el apellido';
+        return false;
+      }
+      let dni: string = this.dni;
+      if (this.dni == (null || '' || undefined) || dni.length == 0) {
+        this.mensaje = 'Debe completar el DNI';
+        return false;
+      }
+      if (this.dni < 1000000 || this.dni > 99999999) {
+        this.mensaje = 'Debe ingresar un DNI mayor a 1.000.000 y menor a 99.999.999';
+        return false;
+      }
+      if (isNaN(this.dni)) {
+        this.mensaje = 'Debe ingresar un DNI num\u00E9rico';
+        return false;
+      }
+      let cuil: string = this.cuil;
+      if (this.cuil == (null || '' || undefined) || cuil.length == 0) {
+        this.mensaje = 'Debe completar el CUIL';
+        return false;
+      }
+      let email: string = this.usuario;
+      if (this.usuario == (null || '' || undefined) || email.length == 0) {
+        this.mensaje = 'Debe completar el email';
+        return false;
+      }
+      let clave1: string = this.clave;
+      if (this.clave == (null || '' || undefined) || clave1.length == 0) {
+        this.mensaje = 'Debe completar la clave';
+        return false;
+      }
+      let clave2: string = this.claveDos;
+      if (this.claveDos == (null || '' || undefined) || clave2.length == 0) {
+        this.mensaje = 'Debe completar la confirmaci\u00F3n de la clave';
+        return false;
+      }
+      if (this.clave != this.claveDos) {
+        this.mensaje = 'Las claves son distintas';
+        return false;
+      }
+      if (this.sexo == (null || '' || undefined)) {
+        this.mensaje = 'Debe seleccionar un sexo';
+        return false;
+      }
     }
-    let apellido: string = this.apellido;
-    if (this.apellido == (null || '' || undefined) || apellido.length == 0) {
-      this.mensaje = 'Debe completar el apellido';
-      return false;
+    else
+    {
+      if (this.nick == (null || '' || undefined) || this.nick.length == 0) {
+        this.mensaje = 'Debe completar el nombre de usuario';
+        return false;
+      }
     }
-    let dni: string = this.dni;
-    if (this.dni == (null || '' || undefined) || dni.length == 0) {
-      this.mensaje = 'Debe completar el DNI';
-      return false;
-    }
-    if (this.dni < 1000000 || this.dni > 99999999) {
-      this.mensaje = 'Debe ingresar un DNI mayor a 1.000.000 y menor a 99.999.999';
-      return false;
-    }
-    if (isNaN(this.dni)) {
-      this.mensaje = 'Debe ingresar un DNI num\u00E9rico';
-      return false;
-    }
-    let cuil: string = this.cuil;
-    if (this.cuil == (null || '' || undefined) || cuil.length == 0) {
-      this.mensaje = 'Debe completar el CUIL';
-      return false;
-    }
-    let email: string = this.usuario;
-    if (this.usuario == (null || '' || undefined) || email.length == 0) {
-      this.mensaje = 'Debe completar el email';
-      return false;
-    }
-    let clave1: string = this.clave;
-    if (this.clave == (null || '' || undefined) || clave1.length == 0) {
-      this.mensaje = 'Debe completar la clave';
-      return false;
-    }
-    let clave2: string = this.claveDos;
-    if (this.claveDos == (null || '' || undefined) || clave2.length == 0) {
-      this.mensaje = 'Debe completar la confirmaci\u00F3n de la clave';
-      return false;
-    }
-    if (this.clave != this.claveDos) {
-      this.mensaje = 'Las claves son distintas';
-      return false;
-    }
-    if (this.sexo == (null || '' || undefined)) {
-      this.mensaje = 'Debe seleccionar un sexo';
-      return false;
-    }
-
     return true;
 
   }

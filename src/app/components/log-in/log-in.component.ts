@@ -126,7 +126,7 @@ export class LogInComponent implements OnInit {
 
 
   registrarUsuario() {
-    this.router.navigate(['/register/']);
+    this.router.navigate(['/register/cliente']);
   }
 
 
