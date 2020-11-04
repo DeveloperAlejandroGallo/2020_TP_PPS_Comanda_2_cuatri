@@ -29,8 +29,7 @@
 
 <div *ngIf="perfilUsuarioActivo == 'duenio'">
   <app-perfil-duenio (perfilRegistrar)="recibirPerfilRegistrar($event)"></app-perfil-duenio>
-
-  <button (click)="notificacion('registro')">Notificacion</button>
+  
 </div>
 
 <div *ngIf="perfilUsuarioActivo == 'cliente'">

@@ -20,10 +20,6 @@ export class HomePage {
 
   // public ucorreoActivo;
 
-  public notificacion(perfil) {
-    this.push.enviarNotificacion(perfil);
-  }
-
 
   constructor(private authService: AuthenticationService, private router:Router,private firestore:FirestoreService,private navCtrl: NavController, private push: PushNotificationsService) {
     this.pagina="Inicio";

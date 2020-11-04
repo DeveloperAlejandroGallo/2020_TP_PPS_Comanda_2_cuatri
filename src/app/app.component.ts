@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { PushNotificationsService } from "./servicios/push-notifications.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private nativeAudio: NativeAudio
+    private nativeAudio: NativeAudio,
+    private push: PushNotificationsService
   ) {
     this.initializeApp();
   }
@@ -37,7 +39,7 @@ export class AppComponent {
       }, onError=>{
         console.log(onError);
       });
-
+      this.push.setup();
     });
   }
 

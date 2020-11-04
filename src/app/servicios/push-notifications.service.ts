@@ -6,21 +6,33 @@ import { Push, PushObject, PushOptions } from "@ionic-native/push/ngx";
 })
 export class PushNotificationsService {
 
-  constructor(private push: Push) { }
+  constructor(private push: Push) {
 
-  opciones: PushOptions = {
-    android: {
-      sound: true,
-      vibrate: true,
-      forceShow: true,
-    },
-    ios: {},
-    windows: {},
-    browser: {}
+    this.VerificarPermisos();
   }
 
-  objetoPush: PushObject = this.push.init(this.opciones);
+  setup() {
 
+    const opciones: PushOptions = {
+      android: {
+        senderID: "737699765257"
+      },
+      ios: {
+        alert: 'true',
+        badge: true,
+        sound: 'false'
+      }
+    }
+
+    const objetoPush: PushObject = this.push.init(opciones);
+
+
+    objetoPush.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+    objetoPush.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+    objetoPush.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  }
 
 
   VerificarPermisos() {
@@ -43,9 +55,5 @@ export class PushNotificationsService {
     }).then(() => console.log("Canal creado"));
   }
 
-  enviarNotificacion(notificacion) {
-    //notificacion va a tener el valor del evento - ejemplo "registro"
-    this.objetoPush.on(notificacion).subscribe(notif => console.log("Notificación recibida"));
-  }
 
 }
