@@ -53,6 +53,8 @@ export class HomePage {
 
 
   recibirPerfil(e){
+    console.log("perfil que llega:");
+    console.log(e);
     this.perfilUsuarioActivo = e;
   }
 

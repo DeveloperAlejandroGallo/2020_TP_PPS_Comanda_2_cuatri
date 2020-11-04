@@ -10,7 +10,7 @@ import { NumericValueAccessor, ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { disableDebugTools } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { timeStamp } from 'console';
+// import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,8 +21,6 @@ export class SignUpComponent implements OnInit {
 
   public usuarioActivo;
 
-
-
   public mostrarMensaje = false;
   public mostrarError = false;
   public tituloMensaje;
@@ -31,7 +29,7 @@ export class SignUpComponent implements OnInit {
   public nombre;
   public apellido;
   public dni;
-  public cuil;
+  public cuil=null;
   public usuario;
   public sexo = "Femenino";
   public clave;
@@ -83,7 +81,7 @@ export class SignUpComponent implements OnInit {
     if (this.perfilAlta == 'empleado')
       this.tipo = 'Mozo';
     else if (this.perfilAlta == 'cliente')
-      this.tipo = 'Anonimo';
+      this.tipo = 'anonimo';
     else
       this.tipo = '';
     console.log(this.perfilAlta + ' - ' + this.tipo);
@@ -114,13 +112,27 @@ export class SignUpComponent implements OnInit {
           res.user.sendEmailVerification({ handleCodeInApp: true, url: environment.urlVerify });
 
         this.firestore.saveUser(user.toJson()).then(resp => {
+          if(this.perfilAlta == 'cliente')
+            this.firestore.savePendientesAprobar(user.toJson()).then(guardo=>{
+              console.log("guardado en pendientes");
+            });
+          
+          
           Swal.fire({
             title: 'Ã‰xito',
             text: 'El usuario fue dado de alta correctamente',
             icon: 'success'
           }
           ).then(result => {
-            this.router.navigate(['/home']);
+
+            if (this.tipo == 'anonimo'){
+              this.auth.iniciarSesion(this.usuario,this.clave).then(respue=>{
+                this.router.navigate(['/home']);
+              });
+            } else {
+              this.router.navigate(['/login']);
+            }
+
           });
           // this.mostrarNotificacion(true,'El usuario fue dado de alta correctamente');
         }).catch(err => {
@@ -130,28 +142,8 @@ export class SignUpComponent implements OnInit {
       }).catch(error => {
         console.log("rompio el authentication");
         console.log(error);
-        switch (error.code) {
-          case 'auth/weak-password':
-            this.mensaje = this.tipo != 'anonimo' ? 'La clave debe poseer al menos 6 caracteres' : 'El usuario debe tener al menos 6 caracteres';
-            break;
-          case 'auth/email-already-in-use':
-            this.mensaje = this.tipo != 'anonimo' ? 'Correo ya registrado' : 'El nombre de usuario ya está siendo utilizado.';
-            break;
-          case 'auth/invalid-email':
-            this.mensaje = this.tipo != 'anonimo' ? 'Correo con formato inv\u00E1lido' : 'El nombre de usaurio elegido no es v\u00E1lido';
-            break;
-          case 'auth/argument-error':
-            if (error.message == 'createUserWithEmailAndPassword failed: First argument "email" must be a valid string.')
-              this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
-            else
-              this.mensaje = this.tipo != 'anonimo' ? 'La constrase\u00F1a debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
-            break;
-          case 'auth/argument-error':
-            this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
-            break;
-          default:
-            this.mensaje = 'Error en registro';
-        }
+        this.setearMsjError(error);
+       
         Swal.fire({
           title: 'Error',
           text: this.mensaje,
@@ -177,17 +169,13 @@ export class SignUpComponent implements OnInit {
   }
 
 
+
+
   tomarFoto() {
     this.camera.getPicture(this.optionsCamera).then((imageData) => {
 
       this.imagenCargada = 'data:image/jpeg;base64,' + imageData;
 
-      // if(imageData !== 'No Image Selected'){
-      //   this.imagenesParaCargar.push(this.imagenCargada);
-      //   // this.guardarFoto(this.imageURL);
-      // }else{
-      // }
-      // console.log(this.imageURL);
     }).catch((err) => {
       console.log(err);
 
@@ -292,15 +280,36 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  //  setSex(value){
-  //    this.sexo=value;
-  //    console.log(this.sexo);
-  //   }
-
   setType(e) {
     this.tipo = e;
     console.log(this.tipo);
   }
+
+
+private setearMsjError(error){
+  switch (error.code) {
+    case 'auth/weak-password':
+      this.mensaje = this.tipo != 'anonimo' ? 'La clave debe poseer al menos 6 caracteres' : 'El usuario debe tener al menos 6 caracteres';
+      break;
+    case 'auth/email-already-in-use':
+      this.mensaje = this.tipo != 'anonimo' ? 'Correo ya registrado' : 'El nombre de usuario ya estï¿½ siendo utilizado.';
+      break;
+    case 'auth/invalid-email':
+      this.mensaje = this.tipo != 'anonimo' ? 'Correo con formato inv\u00E1lido' : 'El nombre de usaurio elegido no es v\u00E1lido';
+      break;
+    case 'auth/argument-error':
+      if (error.message == 'createUserWithEmailAndPassword failed: First argument "email" must be a valid string.')
+        this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
+      else
+        this.mensaje = this.tipo != 'anonimo' ? 'La constrase\u00F1a debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
+      break;
+    case 'auth/argument-error':
+      this.mensaje = this.tipo != 'anonimo' ? 'Correo con debe ser una cadena v\u00E1lida' : 'El usuario no tiene un formato v\u00E1lido';
+      break;
+    default:
+      this.mensaje = 'Error en registro';
+  }
+}
 
   private camposValidos() {
     if (this.tipo != 'anonimo') {
@@ -328,9 +337,11 @@ export class SignUpComponent implements OnInit {
         return false;
       }
       let cuil: string = this.cuil;
-      if (this.cuil == (null || '' || undefined) || cuil.length == 0) {
-        this.mensaje = 'Debe completar el CUIL';
-        return false;
+      if(this.perfilAlta!='cliente'){
+        if (this.cuil == (null || '' || undefined) || cuil.length == 0) {
+          this.mensaje = 'Debe completar el CUIL';
+          return false;
+        }
       }
       let email: string = this.usuario;
       if (this.usuario == (null || '' || undefined) || email.length == 0) {
@@ -366,5 +377,6 @@ export class SignUpComponent implements OnInit {
     return true;
 
   }
+
 
 }

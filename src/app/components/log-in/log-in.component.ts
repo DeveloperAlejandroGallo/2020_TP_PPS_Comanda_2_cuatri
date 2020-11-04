@@ -19,7 +19,6 @@ export class LogInComponent implements OnInit {
   clave: string;
   usuariosBD = [];
   usuariosClientes = [];
-  clientes;
   public usuarioActivo = false;
   emailVerificado = null;
 
@@ -36,17 +35,10 @@ export class LogInComponent implements OnInit {
         this.usuariosBD.push(user);
       }
 
-      // console.log(this.usuariosBD);
 
-      // for (let index = 0; index < this.usuariosBD.length; index++) {
-      //   const element = this.usuariosBD[index];
-      //   if (element.perfil == "cliente")
-      //     this.usuariosClientes.push(element);
-      // }
       this.usuariosClientes = this.usuariosBD.filter(user => user.perfil == "cliente");
 
 
-      // console.log(this.usuariosClientes);
 
     });
 
@@ -91,7 +83,7 @@ export class LogInComponent implements OnInit {
         }, 2500);
       }
     } else
-    this.loguearUsuario();
+      this.loguearUsuario();
 
   }
 
@@ -100,19 +92,28 @@ export class LogInComponent implements OnInit {
 
   loguearUsuario() {
     this.authService.iniciarSesion(this.usuario, this.clave).then(resp => {
+   
+      
+      // DESCOMENTAR cuando carguemos datos reales y borrar las dos lineas de acá abajo
 
       console.log(resp);
-      let aux = resp;
-      this.router.navigate(['/home']);
-
-      // emailVerified
-      // this.emailVerificado=aux.user.emailVerified;
-      // if(this.emailVerificado==true){
+      this.router.navigate(['/home']);    
+      // if(resp.user.emailVerified){
+      //   console.log(resp);
       //   this.router.navigate(['/home']);
-      // } else {
-      //   this.mensaje="Falta verificar la cuenta. Por favor revise su correo";
-      //   this.mostrar=true;
+
+      // }else{
+
+      //   this.authService.cerrarSesion().then(res=>{});
+      //   this.mensaje = "Falta verificar el correo. Ingrese a su casiila o revise en Correo No Deseado.";
+      //   this.mostrar = true;
+      //   setTimeout(() => {
+      //     this.mostrar = false;
+      //   }, 2500);
+
+
       // }
+
 
     }).catch(error => {
       console.log(error);
@@ -123,6 +124,7 @@ export class LogInComponent implements OnInit {
       }, 2500);
     });
   }
+
 
 
   registrarUsuario() {
@@ -149,8 +151,8 @@ export class LogInComponent implements OnInit {
         break;
       }
       case 'User4': {
-        this.usuario = 'anonimo@anonimo.com';
-        this.clave = '444444';
+        this.usuario = 'cocosalsero@anonimo.com';
+        this.clave = 'cocosalsero';
         break;
       }
       case 'User5': {

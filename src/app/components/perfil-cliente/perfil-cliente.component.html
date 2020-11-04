@@ -1,12 +1,19 @@
 <ion-content [fullscreen]="true">
 
-  <div id="container">
 
-    <p>
-  perfil-cliente works!
-</p>
-
-
-</div>
+    <div *ngIf="!enListaDeEspera" id="container">
+      
+      <div class="fila">
+        <ion-button color="light" class="mediaPagina centrado drop">
+          <img src="../../../assets/imagenes/ingresoQR.png" alt="cuartoA" style="margin: 4%;" width="70%">
+        </ion-button>
+      </div>
+      <div class="fila">
+        <ion-button color="light" class="mediaPagina centrado drop">
+          <img src="../../../assets/imagenes/reseniasQR.png" alt="cuartoA" style="margin: 4%;" width="70%">
+        </ion-button>
+      </div>
+      
+    </div>
 
 </ion-content>
