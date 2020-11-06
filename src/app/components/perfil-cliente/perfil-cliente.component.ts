@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthenticationService } from 'src/app/servicios/authentication.service';
 import { FirestoreService } from 'src/app/servicios/firestore.service';
@@ -12,71 +12,141 @@ import Swal from 'sweetalert2';
 })
 export class PerfilClienteComponent implements OnInit {
 
-  usuario;
+  usuarioActivoCorreo;
+  usuariosBD;
+  usuarioBDActivo:Usuario;
   waitingList;
-  public enListaDeEspera = false;
+  enListaDeEspera = false;
+  qrLeido;
 
+  options: BarcodeScannerOptions = {
+    //prompt : "Escaneando", // Android
+    resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+    orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+    disableAnimations: true, // iOS
+    disableSuccessBeep: false // iOS and Android
+  };
 
   constructor(private auth: AuthenticationService,
     private firestore: FirestoreService,
     private barcode: BarcodeScanner) {
 
     auth.currentUser().then(resp => {
-      this.usuario = resp.email;
+      this.usuarioActivoCorreo = resp.email;
 
       let user: Usuario;
 
       console.log("en el constructor");
-      console.log(this.usuario);
-      firestore.getListaEspera().subscribe((res: any) => {
+      console.log(this.usuarioActivoCorreo);
+
+      firestore.getUsuarios().subscribe((resp: any) => {
+        this.usuariosBD = [];
+        for (let index = 0; index < resp.length; index++) {
+          const element = resp[index];
+  
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto);
+
+          if(user.correo == this.usuarioActivoCorreo){
+            console.log(user);
+            this.usuarioBDActivo = user;
+          }
+
+          this.usuariosBD.push(user);
+        }
+      });
+
+      firestore.getListaDeEspera().subscribe((res: any) => {
         this.waitingList = [];
         for (let index = 0; index < res.length; index++) {
-          const element = resp[index];
+          const element = res[index];
 
-          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, element.payload.doc.data().cuil, element.payload.doc.data().foto);
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto);
 
           this.waitingList.push(user);
         }
 
       });
 
-      console.log(this.enListaDeEspera);
-
-      // Swal.fire({
-      //   title: 'Bienvenido',
-      //   text: 'Estamos verificando el estado de su usuario',
-      //   icon: 'info',
-      //   showCancelButton: false,
-      //   confirmButtonText: 'Adelante',
-      //   showConfirmButton: false,
-      //   timer: 2000,
-      //   timerProgressBar: true})
-      //   .then(resultado=>{
-  
-          if(this.waitingList != null){
-  
-            let estaEnEspera = this.waitingList.filter(user => user.correo == this.usuario);
-            if (estaEnEspera.length == 1)
-            this.enListaDeEspera = true;
-            else
-            this.enListaDeEspera = false;
-          }
-          
-      //   });
-  
-
-
 
     })
 
-
-
   }
+
 
   ngOnInit() {
-  
+  }
 
+
+
+  escanear(){
+    // this.barcode.scan(this.options).then(barcodeData=>{
+    //   this.qrLeido = barcodeData.text;
+
+    this.qrLeido = "ingreso";
+
+      switch(this.qrLeido){
+        case "ingreso":{
+          if(this.verificaWaitingList()){
+            this.muestraSwal("Sea paciente","warning","Ya se encuentra en lista de espera. Un mozo le asignará una mesa a la brevedad");
+          }else{
+            this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson()).then(resp=>{
+              this.muestraSwal("¡Bienvenido!","success","Ha ingresado en lista de espera. Un mozo le asignará una mesa a la brevedad");
+            }).catch(error=>{
+              this.muestraSwal("¡Error!","error","No pudo ingresar a la lista de espera. Contacte al dueño.");
+            });
+          }
+          break;
+        }
+        case "encuestas":{
+            break;
+          }
+          default:{
+
+            var nroMesa= this.qrLeido.substr(-1);
+           break; 
+          }
+      }
+
+    // });
+  }
+
+
+  verificaWaitingList(){
+
+    if(this.waitingList != null){
+  
+      let estaEnEspera = this.waitingList.filter(user => user.correo == this.usuarioActivoCorreo);
+      if (estaEnEspera.length == 1)
+      {
+
+        this.enListaDeEspera = true;
+        return true;
+      }
+      else{
+
+        this.enListaDeEspera = false;
+        return false;
+      }
+    }
 
   }
+
+
+
+
+
+
+
+  muestraSwal(titulo,icono,mensaje){
+
+    Swal.fire({
+      title: titulo,
+      text: mensaje,
+      icon: icono
+    });
+
+  }
+
+
 
 }

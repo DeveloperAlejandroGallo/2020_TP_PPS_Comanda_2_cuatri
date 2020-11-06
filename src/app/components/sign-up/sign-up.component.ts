@@ -207,7 +207,7 @@ export class SignUpComponent implements OnInit {
         this.nombre = dni[2];
         this.sexo = dni[3] == 'M' ? 'Masculino' : 'Femenino';
         this.dni = dni[4];
-        this.cuil = dni[8] != null ? dni[8].substr(0, 2) + dni[4] + dni[8].substr(-1) : '';
+        this.cuil = dni[8] != null ? dni[8].substr(0, 2) + dni[4] + dni[8].substr(-1) : this.calcularCUIT();
       } else {
         this.apellido = dni[4];
         this.nombre = dni[5];

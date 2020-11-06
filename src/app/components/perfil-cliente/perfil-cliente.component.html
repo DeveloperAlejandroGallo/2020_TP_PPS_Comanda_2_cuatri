@@ -1,7 +1,19 @@
 <ion-content [fullscreen]="true">
 
+  <div id="container">
 
-    <div *ngIf="!enListaDeEspera" id="container">
+
+    <div class="fila">
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;"
+          src="../../../assets/imagenes/scanearQR.png" (click)="escanear()"></ion-button>
+
+
+    </div>
+
+
+  </div>
+
+  <!-- <div *ngIf="!enListaDeEspera" id="container">
       
       <div class="fila">
         <ion-button color="light" class="mediaPagina centrado drop">
@@ -14,6 +26,6 @@
         </ion-button>
       </div>
       
-    </div>
+    </div> -->
 
 </ion-content>

@@ -1,16 +1,16 @@
 export class Usuario {
 
     //	usuarios -> nombre, apellido, dni, sexo, (cuil), (foto), perfil, (tipo), correo, (aprobado)
-    private nombre:string;
-    private apellido:string;
-    private dni:string;
-    private sexo:string;
-    private cuil:string;
-    private foto:string;
-    private perfil:string;
-    private tipo:string;
-    private correo:string;
-    private aprobado:boolean;
+    public nombre:string;
+    public apellido:string;
+    public dni:string;
+    public sexo:string;
+    public cuil:string;
+    public foto:string;
+    public perfil:string;
+    public tipo:string;
+    public correo:string;
+    public aprobado:boolean;
 
 
 
