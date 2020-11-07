@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() pagina: string;
   @Output() perfilUsuarioActivoOutput : EventEmitter<any> = new EventEmitter<any>();
+  @Output() tipoUsuarioActivoOutput : EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private authService: AuthenticationService, private router:Router,private firestore:FirestoreService) {
 
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
               this.perfilUsuarioActivoMostrar = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
               this.perfilUsuarioActivoMostrar = element.payload.doc.data().tipo != undefined? this.perfilUsuarioActivoMostrar+' '+element.payload.doc.data().tipo : this.perfilUsuarioActivoMostrar;
               this.emitirPerfil(this.perfilUsuarioActivo);
+              if(element.payload.doc.data().tipo != undefined) this.emitirTipo(element.payload.doc.data().tipo);
             }
           }
 
@@ -69,6 +71,10 @@ export class NavbarComponent implements OnInit {
 
   emitirPerfil(perfil){
     this.perfilUsuarioActivoOutput.emit(perfil);
+  }
+  
+  emitirTipo(tipo){
+    this.tipoUsuarioActivoOutput.emit(tipo);
   }
 
 }

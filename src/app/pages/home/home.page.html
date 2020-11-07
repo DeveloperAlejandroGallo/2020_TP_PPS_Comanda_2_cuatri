@@ -19,7 +19,7 @@
       <ion-title class="capitalize"><strong>{{perfilUsuarioActivo}}</strong></ion-title>
   </ion-toolbar> -->
 
-  <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" [pagina]="this.pagina"></app-navbar>
+  <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" (tipoUsuarioActivoOutput)="recibirTipo($event)" [pagina]="this.pagina"></app-navbar>
 
 </ion-header>
 
@@ -43,7 +43,7 @@
 </div>
 
 <div *ngIf="perfilUsuarioActivo == 'empleado'">
-  <app-perfil-empleado></app-perfil-empleado>
+  <app-perfil-empleado (perfilRegistrar)="recibirPerfilRegistrar($event)" [tipoUsuarioActivo]="this.tipoUsuarioActivo"></app-perfil-empleado>
 
 </div>
 

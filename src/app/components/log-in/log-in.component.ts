@@ -105,7 +105,7 @@ export class LogInComponent implements OnInit {
       // }else{
 
       //   this.authService.cerrarSesion().then(res=>{});
-      //   this.mensaje = "Falta verificar el correo. Ingrese a su casiila o revise en Correo No Deseado.";
+      //   this.mensaje = "Falta verificar el correo. Ingrese a su casilla o revise en Correo No Deseado.";
       //   this.mostrar = true;
       //   setTimeout(() => {
       //     this.mostrar = false;

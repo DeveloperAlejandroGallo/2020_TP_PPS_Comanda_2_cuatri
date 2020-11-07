@@ -3,20 +3,31 @@
   <div id="container">
 
     <div class="fila">
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png"
-        (click)="registro('cliente')"></ion-button>
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/encuesta.png"
+        (click)="encuesta()"></ion-button>      
+    </div>
+
+    <div class="fila">
+      <div *ngIf="tipoUsuarioActivo=='mozo'"><!-- HAY QUE ARREGLAR EL ALTA DE CLIENTE -->
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="registro('cliente')"></ion-button>
+      </div>
+      <div *ngIf="tipoUsuarioActivo=='bartender'">
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/bebidaNueva.png" (click)="registro('bebida')"></ion-button>
+      </div>
+      <div *ngIf="tipoUsuarioActivo=='cocinero'">
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/plato.png" (click)="registro('plato')"></ion-button>
+      </div>
           
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/supervisora.png"
-        (click)="registro('supervisor')"></ion-button>
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/listaPedidos.png" (click)="registro('supervisor')"></ion-button>
           
     </div>
-    <div class="fila">
+    <!-- <div class="fila">
       <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/empleado.png"
         (click)="registro('empleado')"></ion-button>
           
       <ion-button color="light"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/clientes.png"
           ></ion-button>
-    </div>
+    </div> -->
 
 
   </div>

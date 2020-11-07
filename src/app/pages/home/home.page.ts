@@ -15,6 +15,7 @@ export class HomePage {
   // public usuarioActivo=false;
   // public listadoUsuarios;
   public perfilUsuarioActivo;
+  public tipoUsuarioActivo;
   public pagina;
 
   // public ucorreoActivo;
@@ -53,10 +54,17 @@ export class HomePage {
 
 
   recibirPerfil(e){
-    console.log("perfil que llega:");
-    console.log(e);
     this.perfilUsuarioActivo = e;
   }
+  
+  recibirTipo(e){
+    console.log("tipo que llega:");
+    console.log(e);
+    this.tipoUsuarioActivo = e;
+    console.log(this.tipoUsuarioActivo);
+  }
+
+
 
   recibirPerfilRegistrar(e){
     // console.log(e);
