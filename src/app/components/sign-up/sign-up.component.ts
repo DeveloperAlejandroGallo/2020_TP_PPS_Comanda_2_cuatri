@@ -6,11 +6,8 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FirestoreService } from 'src/app/servicios/firestore.service';
 
-import { NumericValueAccessor, ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
-import { disableDebugTools } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-// import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,11 +16,6 @@ import { environment } from 'src/environments/environment';
 })
 export class SignUpComponent implements OnInit {
 
-  public usuarioActivo;
-
-  public mostrarMensaje = false;
-  public mostrarError = false;
-  public tituloMensaje;
   public mensaje;
 
   public nombre;
@@ -37,7 +29,6 @@ export class SignUpComponent implements OnInit {
   public tipo;
 
   public datoLeido;
-  public formatoLeido;
 
   public imagenCargada;
   public nick: string;
@@ -71,7 +62,6 @@ export class SignUpComponent implements OnInit {
     private auth: AuthenticationService,
     private firestore: FirestoreService,
     private escaner: BarcodeScanner,
-    public toastController: ToastController,
     private camera: Camera) {
 
 
@@ -79,7 +69,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     if (this.perfilAlta == 'empleado')
-      this.tipo = 'Mozo';
+      this.tipo = 'mozo';
     else if (this.perfilAlta == 'cliente')
       this.tipo = 'anonimo';
     else
@@ -125,13 +115,11 @@ export class SignUpComponent implements OnInit {
           }
           ).then(result => {
 
-            if (this.tipo == 'anonimo'){
+            if (this.tipo == 'anonimo')
               this.auth.iniciarSesion(this.usuario,this.clave).then(respue=>{
-                this.router.navigate(['/home']);
+                console.log("inicio sesion anonimo");
               });
-            } else {
-              this.router.navigate(['/login']);
-            }
+              this.router.navigate(['/home']);
 
           });
           // this.mostrarNotificacion(true,'El usuario fue dado de alta correctamente');
@@ -198,7 +186,6 @@ export class SignUpComponent implements OnInit {
       //tipo4  - cuit 27-4
       // let probandinQR = '00489707425@VILLALBA@CLAUDIA@F@17619032@C@30/10/1965@17/04/2017@274';
       this.datoLeido = barcodeData.text;
-      this.formatoLeido = barcodeData.format;
       let dni = this.datoLeido.split('@');
       // let dni = probandinQR.split('@');
 

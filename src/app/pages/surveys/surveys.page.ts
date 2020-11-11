@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveysPage implements OnInit {
 
+  
+  public perfilUsuarioActivo;
+  public pagina;
+  public tipoProducto;
+  
   constructor() { }
 
   ngOnInit() {

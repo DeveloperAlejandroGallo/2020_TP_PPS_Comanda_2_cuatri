@@ -43,7 +43,7 @@
 </div>
 
 <div *ngIf="perfilUsuarioActivo == 'empleado'">
-  <app-perfil-empleado (perfilRegistrar)="recibirPerfilRegistrar($event)" [tipoUsuarioActivo]="this.tipoUsuarioActivo"></app-perfil-empleado>
+  <app-perfil-empleado (parametroEnviado)="recibirParametro($event)" [tipoUsuarioActivo]="this.tipoUsuarioActivo"></app-perfil-empleado>
 
 </div>
 

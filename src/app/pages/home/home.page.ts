@@ -24,32 +24,6 @@ export class HomePage {
   constructor(private authService: AuthenticationService, private router:Router,private firestore:FirestoreService,private navCtrl: NavController) {
     this.pagina="Inicio";
 
-    // authService.currentUser().then(resp=>{
-    //   if(resp != null)
-    //   {
-    //     this.usuarioActivo = true;
-    //     this.ucorreoActivo = resp.email;
-    //   }
-    //     firestore.getUsuarios().subscribe((res:any)=>{   //array de objetos usuario de Firebase
-    //       this.listadoUsuarios = res;
-          
-    //       for (let index = 0; index < this.listadoUsuarios.length; index++) {
-    //         const element = this.listadoUsuarios[index];
-    //         if(element.payload.doc.data().correo == this.ucorreoActivo){
-    //           this.perfilUsuarioActivo = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
-    //         }
-    //       }
-
-
-
-    //     });
-
-    // }).catch(error=>{
-    //   this.usuarioActivo = false;
-  
-    // });
-
-
   }
 
 
@@ -58,27 +32,22 @@ export class HomePage {
   }
   
   recibirTipo(e){
-    console.log("tipo que llega:");
-    console.log(e);
     this.tipoUsuarioActivo = e;
-    console.log(this.tipoUsuarioActivo);
   }
 
 
 
   recibirPerfilRegistrar(e){
-    // console.log(e);
     this.navCtrl.navigateForward('/register/'+e);
   }
+  
+  
+  recibirParametro(e){
+    this.navCtrl.navigateForward('/create/'+e);
 
+    //validar que llega a ver que se hace
+  }
 
-  // salir(){
-  //   this.authService.cerrarSesion().then(resp =>{
-  //     console.log("cerrar sesion");
-  //     console.log(resp);
-  //     this.router.navigate(['/login']);
-  //   });
-  // }
 
 
 

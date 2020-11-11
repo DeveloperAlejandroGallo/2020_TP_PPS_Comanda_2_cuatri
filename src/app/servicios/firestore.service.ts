@@ -9,6 +9,7 @@ export class FirestoreService {
   private collectionUsers="usuarios";
   private collectionListaEspera="listaDeEspera";
   private collectionPendientes="pendientesAprobacion";
+  private collectionProductos="productos";
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -24,6 +25,10 @@ export class FirestoreService {
 
   public getPendientesAprobar() {
     return this.firestore.collection(this.collectionPendientes).snapshotChanges();
+  }
+
+  public getProductos() {
+    return this.firestore.collection(this.collectionProductos).snapshotChanges();
   }
 
 //#endregion
@@ -50,6 +55,12 @@ export class FirestoreService {
 
   }
   
+  public saveProductos(userJson) {
+    console.log("save productos");
+    return this.firestore.collection(this.collectionProductos).add(userJson);
+
+  }
+
   //#endregion
 
 

@@ -10,20 +10,18 @@ export class PerfilEmpleadoComponent implements OnInit {
 
 
   @Input() tipoUsuarioActivo: string;
-  @Output() perfilRegistrar : EventEmitter<string> = new EventEmitter<string>();
+  @Output() parametroEnviado : EventEmitter<string> = new EventEmitter<string>();
 
 
   constructor(private navCtrl: NavController) { 
-    console.log(this.tipoUsuarioActivo);
   }
 
   ngOnInit() {
-    console.log(this.tipoUsuarioActivo);
   }
 
 
-  public registro(perfil){
-    this.perfilRegistrar.emit(perfil);
+  public enviar(perfil){
+    this.parametroEnviado.emit(perfil);
   }
 
 

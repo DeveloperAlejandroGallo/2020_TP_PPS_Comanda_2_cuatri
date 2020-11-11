@@ -8,17 +8,26 @@
     </div>
 
     <div class="fila">
-      <div *ngIf="tipoUsuarioActivo=='mozo'"><!-- HAY QUE ARREGLAR EL ALTA DE CLIENTE -->
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="registro('cliente')"></ion-button>
+      <div *ngIf="tipoUsuarioActivo=='metre'"><!-- HAY QUE ARREGLAR EL ALTA DE CLIENTE, ¿qué pasa despues que un METRE le da el alta? -->
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="enviar('altaCliente')"></ion-button>
+      </div>
+      <div *ngIf="tipoUsuarioActivo=='mozo'">
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/estadoMesas.png" (click)="enviar('listaMesas')"></ion-button>
       </div>
       <div *ngIf="tipoUsuarioActivo=='bartender'">
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/bebidaNueva.png" (click)="registro('bebida')"></ion-button>
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/bebidaNueva.png" (click)="enviar('bebida')"></ion-button>
       </div>
       <div *ngIf="tipoUsuarioActivo=='cocinero'">
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/plato.png" (click)="registro('plato')"></ion-button>
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/plato.png" (click)="enviar('plato')"></ion-button>
       </div>
-          
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/listaPedidos.png" (click)="registro('supervisor')"></ion-button>
+
+      <div *ngIf="tipoUsuarioActivo != 'metre'">
+        <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/listaPedidos.png" (click)="enviar('listaPedidos')"></ion-button>
+      </div>
+
+      <div *ngIf="tipoUsuarioActivo == 'metre'">
+        <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/listaEspera.png" (click)="enviar('listaEspera')"></ion-button>
+      </div>
           
     </div>
     <!-- <div class="fila">

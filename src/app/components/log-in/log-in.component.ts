@@ -160,6 +160,11 @@ export class LogInComponent implements OnInit {
         this.clave = '123123';
         break;
       }
+      case 'User6': {
+        this.usuario = 'juancito@gmail.com';
+        this.clave = 'juancito';
+        break;
+      }
     }
   }
 
