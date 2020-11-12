@@ -10,6 +10,7 @@ export class FirestoreService {
   private collectionListaEspera="listaDeEspera";
   private collectionPendientes="pendientesAprobacion";
   private collectionProductos="productos";
+  private collectionEncuestas="encuestas";
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -29,6 +30,10 @@ export class FirestoreService {
 
   public getProductos() {
     return this.firestore.collection(this.collectionProductos).snapshotChanges();
+  }
+
+  public getEncuestas() {
+    return this.firestore.collection(this.collectionEncuestas).snapshotChanges();
   }
 
 //#endregion
@@ -60,6 +65,13 @@ export class FirestoreService {
     return this.firestore.collection(this.collectionProductos).add(userJson);
 
   }
+  
+  public saveEncuestas(userJson) {
+    console.log("save encuestas");
+    return this.firestore.collection(this.collectionEncuestas).add(userJson);
+
+  }
+
 
   //#endregion
 

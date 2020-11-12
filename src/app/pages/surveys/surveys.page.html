@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" class="header">
 
-  <!-- <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" (tipoUsuarioActivoOutput)="recibirTipo($event)" [pagina]="this.pagina"></app-navbar> -->
+<app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" [pagina]="this.pagina"></app-navbar>
 
 </ion-header>
 
@@ -9,7 +9,9 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-button color="warning">LLEGUE A LAS ENCUESTAS</ion-button>
+  <div *ngIf="perfilUsuarioActivo == 'empleado'">
+    <app-encuesta-empleado [perfilResponde]="this.perfilUsuarioActivo"></app-encuesta-empleado>
+  </div>
 
 
 </ion-content>

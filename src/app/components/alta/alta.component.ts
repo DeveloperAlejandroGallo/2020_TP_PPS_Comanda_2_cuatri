@@ -33,6 +33,7 @@ export class AltaComponent implements OnInit {
 
 
   optionsCamera: CameraOptions = {
+    quality: 15,
     sourceType: this.camera.PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
     correctOrientation: true
