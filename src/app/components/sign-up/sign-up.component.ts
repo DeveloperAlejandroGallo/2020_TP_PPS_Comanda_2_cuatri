@@ -102,11 +102,10 @@ export class SignUpComponent implements OnInit {
           res.user.sendEmailVerification({ handleCodeInApp: true, url: environment.urlVerify });
 
         this.firestore.saveUser(user.toJson()).then(resp => {
-          if(this.perfilAlta == 'cliente')
-            this.firestore.savePendientesAprobar(user.toJson()).then(guardo=>{
-              console.log("guardado en pendientes");
-            });
-          
+          // if(this.perfilAlta == 'cliente')
+          //   this.firestore.savePendientesAprobar(user.toJson()).then(guardo=>{
+          //     console.log("guardado en pendientes");
+          //   });
           
           Swal.fire({
             title: 'Éxito',

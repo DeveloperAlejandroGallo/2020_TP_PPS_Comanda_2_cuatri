@@ -24,9 +24,9 @@ export class FirestoreService {
     return this.firestore.collection(this.collectionListaEspera).snapshotChanges();
   }
 
-  public getPendientesAprobar() {
-    return this.firestore.collection(this.collectionPendientes).snapshotChanges();
-  }
+  // public getPendientesAprobar() {
+  //   return this.firestore.collection(this.collectionPendientes).snapshotChanges();
+  // }
 
   public getProductos() {
     return this.firestore.collection(this.collectionProductos).snapshotChanges();
@@ -54,11 +54,11 @@ export class FirestoreService {
     
   }
   
-  public savePendientesAprobar(userJson) {
-    console.log("save pendientesAprobacion");
-    return this.firestore.collection(this.collectionPendientes).add(userJson);
+  // public savePendientesAprobar(userJson) {
+  //   console.log("save pendientesAprobacion");
+  //   return this.firestore.collection(this.collectionPendientes).add(userJson);
 
-  }
+  // }
   
   public saveProductos(userJson) {
     console.log("save productos");
