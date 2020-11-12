@@ -11,10 +11,11 @@ export class Usuario {
     public tipo:string;
     public correo:string;
     public aprobado:boolean;
+    public id:string;
 
 
 
-    constructor(nombre: string, apellido: string, dni: string, sexo: string, correo: string, perfil: string, tipo?: string, aprobado?: boolean, cuil?: string, foto?: string) {
+    constructor(nombre: string, apellido: string, dni: string, sexo: string, correo: string, perfil: string, tipo?: string, aprobado?: boolean, cuil?: string, foto?: string, id?:string) {
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
@@ -25,6 +26,7 @@ export class Usuario {
         this.tipo=tipo;
         this.correo=correo;
         this.aprobado=aprobado;
+        this.id=id;
     }
 
     toJson(){

@@ -1,0 +1,12 @@
+
+<ion-header [translucent]="true" class="header">
+
+  <app-navbar (perfilUsuarioActivoOutput)="recibirPerfil($event)" [pagina]="this.pagina"></app-navbar>
+
+</ion-header>
+
+<ion-content>
+  
+  <app-listado-clientes [tipoListado]="this.tipoListado"></app-listado-clientes>
+
+</ion-content>

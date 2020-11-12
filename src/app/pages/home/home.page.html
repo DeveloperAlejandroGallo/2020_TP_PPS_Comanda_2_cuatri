@@ -28,7 +28,7 @@
 
 
 <div *ngIf="perfilUsuarioActivo == 'duenio'">
-  <app-perfil-duenio (perfilRegistrar)="recibirPerfilRegistrar($event)"></app-perfil-duenio>
+  <app-perfil-duenio (perfilRegistrar)="recibirPerfilRegistrar($event)" (listaDe)="recibirParametro($event)"></app-perfil-duenio>
 
 </div>
 

@@ -76,6 +76,24 @@ export class FirestoreService {
   //#endregion
 
 
+//#region UPDATE
 
+  
+  updateUser(key: string, user) {
+    var userRef = this.firestore.collection(this.collectionUsers).doc(key);
+
+    return userRef.update(user)
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
+  }
+
+
+
+
+  //#endregion
 
 }

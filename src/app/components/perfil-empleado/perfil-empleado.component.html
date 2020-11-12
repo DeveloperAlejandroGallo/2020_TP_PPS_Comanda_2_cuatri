@@ -9,7 +9,7 @@
 
     <div class="fila">
       <div *ngIf="tipoUsuarioActivo=='metre'"><!-- HAY QUE ARREGLAR EL ALTA DE CLIENTE, ¿qué pasa despues que un METRE le da el alta? -->
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="enviar('altaCliente')"></ion-button>
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="enviar('cliente')"></ion-button>
       </div>
       <div *ngIf="tipoUsuarioActivo=='mozo'">
       <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/estadoMesas.png" (click)="enviar('listaMesas')"></ion-button>

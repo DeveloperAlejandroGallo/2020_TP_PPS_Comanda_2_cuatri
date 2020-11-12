@@ -43,9 +43,11 @@ export class HomePage {
   
   
   recibirParametro(e){
-    this.navCtrl.navigateForward('/create/'+e);
-
     //validar que llega a ver que se hace
+    if(e == 'cliente') this.navCtrl.navigateForward('/register/'+e); // ?
+    if(e == 'bebida' || e == 'plato') this.navCtrl.navigateForward('/create/'+e);
+    if(e == 'clientes') this.navCtrl.navigateForward('/listing/'+e);
+
   }
 
 

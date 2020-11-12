@@ -9,6 +9,7 @@ export class PerfilDuenioComponent implements OnInit {
 
 
   @Output() perfilRegistrar : EventEmitter<string> = new EventEmitter<string>();
+  @Output() listaDe : EventEmitter<string> = new EventEmitter<string>();
 
 
   constructor() { }
@@ -19,6 +20,10 @@ export class PerfilDuenioComponent implements OnInit {
   public registro(perfil){
     this.perfilRegistrar.emit(perfil);
 
+  }
+
+  public enviar(lista){
+    this.listaDe.emit(lista);
 
   }
 
