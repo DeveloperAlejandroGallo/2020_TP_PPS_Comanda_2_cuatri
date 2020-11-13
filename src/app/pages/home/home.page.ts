@@ -47,6 +47,7 @@ export class HomePage {
     if(e == 'cliente') this.navCtrl.navigateForward('/register/'+e); // ?
     if(e == 'bebida' || e == 'plato') this.navCtrl.navigateForward('/create/'+e);
     if(e == 'clientes') this.navCtrl.navigateForward('/listing/'+e);
+    if(e == 'espera') this.navCtrl.navigateForward('/listing/'+e);
 
   }
 
