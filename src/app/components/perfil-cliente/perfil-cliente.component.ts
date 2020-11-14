@@ -44,7 +44,7 @@ export class PerfilClienteComponent implements OnInit {
         for (let index = 0; index < resp.length; index++) {
           const element = resp[index];
   
-          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto);
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto,element.payload.doc.id);
 
           if(user.correo == this.usuarioActivoCorreo){
             console.log(user);
@@ -79,18 +79,18 @@ export class PerfilClienteComponent implements OnInit {
 
 
   escanear(){
-    // this.barcode.scan(this.options).then(barcodeData=>{
-    //   this.qrLeido = barcodeData.text;
+    this.barcode.scan(this.options).then(barcodeData=>{
+      this.qrLeido = barcodeData.text;
 
-    this.qrLeido = "ingreso";
+    // this.qrLeido = "ingreso";
 
       switch(this.qrLeido){
         case "ingreso":{
           if(this.verificaWaitingList()){
-            this.muestraSwal("Sea paciente","warning","Ya se encuentra en lista de espera. Un mozo le asignará una mesa a la brevedad");
+            this.muestraSwal("Sea paciente","warning","Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
           }else{
-            this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson()).then(resp=>{
-              this.muestraSwal("¡Bienvenido!","success","Ha ingresado en lista de espera. Un mozo le asignará una mesa a la brevedad");
+            this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(),this.usuarioBDActivo.id).then(resp=>{
+              this.muestraSwal("¡Bienvenido!","success","Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
             }).catch(error=>{
               this.muestraSwal("¡Error!","error","No pudo ingresar a la lista de espera. Contacte al dueño.");
             });
@@ -107,7 +107,7 @@ export class PerfilClienteComponent implements OnInit {
           }
       }
 
-    // });
+    });
   }
 
 

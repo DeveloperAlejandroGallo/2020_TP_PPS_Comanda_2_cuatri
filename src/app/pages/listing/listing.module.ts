@@ -9,6 +9,7 @@ import { ListingPageRoutingModule } from './listing-routing.module';
 import { ListingPage } from './listing.page';
 import { HomePageModule } from '../home/home.module';
 import { ListadoClientesComponent } from 'src/app/components/listado-clientes/listado-clientes.component';
+import { ListadoEsperaComponent } from 'src/app/components/listado-espera/listado-espera.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ListadoClientesComponent } from 'src/app/components/listado-clientes/li
     HomePageModule
   ],
   declarations: [ListingPage,
-  ListadoClientesComponent]
+    ListadoClientesComponent,
+    ListadoEsperaComponent]
 })
-export class ListingPageModule {}
+export class ListingPageModule { }

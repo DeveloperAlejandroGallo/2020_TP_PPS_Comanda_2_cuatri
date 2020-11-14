@@ -12,10 +12,11 @@ export class Usuario {
     public correo:string;
     public aprobado:boolean;
     public id:string;
+    public enMesa:boolean;
 
 
 
-    constructor(nombre: string, apellido: string, dni: string, sexo: string, correo: string, perfil: string, tipo?: string, aprobado?: boolean, cuil?: string, foto?: string, id?:string) {
+    constructor(nombre: string, apellido: string, dni: string, sexo: string, correo: string, perfil: string, tipo?: string, aprobado?: boolean, cuil?: string, foto?: string, id?:string, enMesa?:boolean) {
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
@@ -26,11 +27,12 @@ export class Usuario {
         this.tipo=tipo;
         this.correo=correo;
         this.aprobado=aprobado;
-        this.id=id;
+        if(id) this.id=id;
+        if(enMesa) this.enMesa=enMesa;
     }
 
     toJson(){
-        return{ "nombre":this.nombre, "apellido":this.apellido, "dni":this.dni, "sexo":this.sexo, "cuil":this.cuil, "foto":this.foto, "perfil":this.perfil, "tipo":this.tipo, "correo":this.correo, "aprobado":this.aprobado }
+        return{ "nombre":this.nombre, "apellido":this.apellido, "dni":this.dni, "sexo":this.sexo, "cuil":this.cuil, "foto":this.foto, "perfil":this.perfil, "tipo":this.tipo, "correo":this.correo, "aprobado":this.aprobado, "id":this.id,"enMesa":this.enMesa }
     }
 
 

@@ -6,7 +6,12 @@
 </ion-header>
 
 <ion-content>
-  
-  <app-listado-clientes [tipoListado]="this.tipoListado"></app-listado-clientes>
+  <div *ngIf="tipoListado == 'clientes'">
+    <app-listado-clientes [tipoListado]="this.tipoListado"></app-listado-clientes>
+  </div>
+
+  <div *ngIf="tipoListado == 'espera'">
+    <app-listado-espera [tipoListado]="this.tipoListado"></app-listado-espera>
+  </div>
 
 </ion-content>

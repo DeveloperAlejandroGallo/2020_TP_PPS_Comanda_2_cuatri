@@ -11,6 +11,7 @@ export class FirestoreService {
   private collectionPendientes="pendientesAprobacion";
   private collectionProductos="productos";
   private collectionEncuestas="encuestas";
+  private collectionMesas="mesas";
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -36,6 +37,10 @@ export class FirestoreService {
     return this.firestore.collection(this.collectionEncuestas).snapshotChanges();
   }
 
+  public getMesas() {
+    return this.firestore.collection(this.collectionMesas).snapshotChanges();
+  }
+
 //#endregion
 
 
@@ -48,9 +53,10 @@ export class FirestoreService {
 
   }
   
-  public saveListaDeEspera(userJson){
+  public saveListaDeEspera(userJson,id){
     console.log("save listaDeEspera");
-    return this.firestore.collection(this.collectionListaEspera).add(userJson);
+    return this.firestore.collection(this.collectionListaEspera).doc(id).set(userJson);
+    // return this.firestore.collection(this.collectionListaEspera).add(userJson);
     
   }
   
@@ -92,8 +98,66 @@ export class FirestoreService {
   }
 
 
+  // updateTable(key: string, data) {
+  //   var tableRef = this.firestore.collection(this.collectionMesas).doc(key);
+
+  //   return tableRef.update(data)
+  //     .then(function () {
+  //       console.log("Document successfully updated!");
+  //     })
+  //     .catch(function (error) {
+  //       console.error("Error updating document: ", error);
+  //     });
+  // }
+
+  updateBD(key: string, datos,collectionBD) {
+    console.log(key);
+    console.log(datos);
+    var varRef = this.firestore.collection(collectionBD).doc(key);
+
+    return varRef.update(datos)
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
+  }
+
+
 
 
   //#endregion
+
+
+
+
+//#region DELETEs
+
+deleteRegFrom(key:string,collectionBD:string){
+
+  this.firestore.collection(collectionBD).doc(key).delete().then(function() {
+    console.log("Document successfully deleted!");
+}).catch(function(error) {
+    console.error("Error removing document: ", error);
+});
+
+
+}
+
+//#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

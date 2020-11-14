@@ -16,7 +16,7 @@ export class ListingPage implements OnInit {
 
   ngOnInit() {
     this.tipoListado = this.route.snapshot.paramMap.get('tipoList');
-    this.pagina = "Listado de " + this.tipoListado;
+    this.pagina = "Lista de " + this.tipoListado;
     
   }
 
