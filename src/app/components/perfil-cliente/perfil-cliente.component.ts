@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthenticationService } from 'src/app/servicios/authentication.service';
@@ -18,6 +18,8 @@ export class PerfilClienteComponent implements OnInit {
   waitingList;
   enListaDeEspera = false;
   qrLeido;
+
+  @Output() parametroEnviado : EventEmitter<string> = new EventEmitter<string>();
 
   options: BarcodeScannerOptions = {
     //prompt : "Escaneando", // Android
@@ -82,7 +84,7 @@ export class PerfilClienteComponent implements OnInit {
     // this.barcode.scan(this.options).then(barcodeData => {
     //   this.qrLeido = barcodeData.text;
 
-      this.qrLeido = "ingreso";
+      this.qrLeido = "mesa2";
 
       switch (this.qrLeido) {
         case "ingreso": {
@@ -105,8 +107,17 @@ export class PerfilClienteComponent implements OnInit {
           break;
         }
         default: {
+          if(this.usuarioBDActivo.enMesa != null || this.usuarioBDActivo.enMesa == undefined){
+            var nroMesa = this.qrLeido.substr(-1);
+            if(this.usuarioBDActivo.enMesa != nroMesa){
+              this.muestraSwal('¡Error!','error','Ése no es el QR de su mesa. Escanee el correcto. Su mesa es la número '+ this.usuarioBDActivo.enMesa);
+            }else{
+              this.parametroEnviado.emit('mesaCliente');
+            }
+          } else {
+            this.muestraSwal('¡Atención!','warning','Aún no tiene una mesa asignada. Aguarde o escanee el QR correcto.');
+          }
 
-          var nroMesa = this.qrLeido.substr(-1);
           break;
         }
       }

@@ -33,7 +33,7 @@
 </div>
 
 <div *ngIf="perfilUsuarioActivo == 'cliente'">
-  <app-perfil-cliente></app-perfil-cliente>
+  <app-perfil-cliente (parametroEnviado)="recibirParametro($event)"></app-perfil-cliente>
 
 </div>
 

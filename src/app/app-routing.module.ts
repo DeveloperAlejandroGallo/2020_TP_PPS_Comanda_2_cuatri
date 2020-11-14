@@ -10,7 +10,11 @@ const routes: Routes = [
   {path: 'register/:perfil',loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)},
   {path: 'surveys',loadChildren: () => import('./pages/surveys/surveys.module').then( m => m.SurveysPageModule)},
   {path: 'create/:producto',loadChildren: () => import('./pages/create/create.module').then( m => m.CreatePageModule)},
-  {path: 'listing/:tipoList',loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)},
+  {path: 'listing/:tipoList',loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)},  {
+    path: 'client',
+    loadChildren: () => import('./pages/client/client.module').then( m => m.ClientPageModule)
+  },
+
 
 
 
