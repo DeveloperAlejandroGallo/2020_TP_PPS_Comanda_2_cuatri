@@ -27,8 +27,8 @@ export class Usuario {
         this.tipo=tipo;
         this.correo=correo;
         this.aprobado=aprobado;
-        if(id) this.id=id;
-        if(enMesa) this.enMesa=enMesa;
+        if(id) this.id=id; else this.id=null;
+        if(enMesa) this.enMesa=enMesa; else this.enMesa = null
     }
 
     toJson(){

@@ -39,7 +39,7 @@ export class ListadoEsperaComponent implements OnInit {
       this.listadoMesas = [];
       for (let index = 0; index < res.length; index++) {
         const element = res[index];
-        mesa = new Mesa(element.payload.doc.data().cliente, element.payload.doc.data().comensales, element.payload.doc.data().estado, element.payload.doc.data().numero, element.payload.doc.data().pedido, element.payload.doc.data().tipo, element.payload.doc.id);
+        mesa = new Mesa(element.payload.doc.data().comensales, element.payload.doc.data().estado, element.payload.doc.data().numero, element.payload.doc.data().tipo, element.payload.doc.id, element.payload.doc.data().cliente, element.payload.doc.data().pedido);
 
         this.listadoMesas.push(user);
         if (mesa.estado == "libre") this.listadoMesasLibres.push(mesa);
@@ -65,6 +65,7 @@ export class ListadoEsperaComponent implements OnInit {
 
     Swal.fire({
       title: 'La mesa ' + this.listadoMesasLibres[0].numero + ' se encuentra disponible',
+      text: 'Tipo de mesa: '+this.listadoMesasLibres[0].tipo + ' hasta '+ this.listadoMesasLibres[0].comensales + ' comensales',
       showDenyButton: true,
       confirmButtonText: `Asignar`,
       denyButtonText: `No gracias`
@@ -77,6 +78,7 @@ export class ListadoEsperaComponent implements OnInit {
         if (this.listadoMesasLibres[1]) {
         Swal.fire({
           title: 'La mesa ' + this.listadoMesasLibres[1].numero + ' se encuentra disponible',
+          text: 'Tipo de mesa: '+this.listadoMesasLibres[1].tipo + ' hasta '+ this.listadoMesasLibres[1].comensales + ' comensales',
           showDenyButton: true,
           confirmButtonText: `Asignar`,
           denyButtonText: `No gracias`
@@ -90,6 +92,7 @@ export class ListadoEsperaComponent implements OnInit {
             if (this.listadoMesasLibres[2]) {
               Swal.fire({
                 title: 'La mesa ' + this.listadoMesasLibres[2].numero + ' se encuentra disponible',
+                text: 'Tipo de mesa: '+this.listadoMesasLibres[2].tipo + ' hasta '+ this.listadoMesasLibres[2].comensales + ' comensales',
                 showDenyButton: true,
                 confirmButtonText: `Asignar`,
                 denyButtonText: `No gracias`
@@ -102,6 +105,7 @@ export class ListadoEsperaComponent implements OnInit {
                   if (this.listadoMesasLibres[3]) {
                     Swal.fire({
                       title: 'La mesa ' + this.listadoMesasLibres[3].numero + ' se encuentra disponible',
+                      text: 'Tipo de mesa: '+this.listadoMesasLibres[3].tipo + ' hasta '+ this.listadoMesasLibres[3].comensales + ' comensales',
                       showDenyButton: true,
                       confirmButtonText: `Asignar`,
                       denyButtonText: `No gracias`
@@ -114,6 +118,7 @@ export class ListadoEsperaComponent implements OnInit {
                         if (this.listadoMesasLibres[4]) {
                           Swal.fire({
                             title: 'La mesa ' + this.listadoMesasLibres[4].numero + ' se encuentra disponible',
+                            text: 'Tipo de mesa: '+this.listadoMesasLibres[4].tipo + ' hasta '+ this.listadoMesasLibres[4].comensales + ' comensales',
                             showDenyButton: true,
                             confirmButtonText: `Asignar`,
                             denyButtonText: `No gracias`
@@ -126,6 +131,7 @@ export class ListadoEsperaComponent implements OnInit {
                               if (this.listadoMesasLibres[5]) {
                                 Swal.fire({
                                   title: 'La mesa ' + this.listadoMesasLibres[5].numero + ' se encuentra disponible',
+                                  text: 'Tipo de mesa: '+this.listadoMesasLibres[5].tipo + ' hasta '+ this.listadoMesasLibres[5].comensales + ' comensales',
                                   showDenyButton: true,
                                   confirmButtonText: `Asignar`,
                                   denyButtonText: `No gracias`

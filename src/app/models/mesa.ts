@@ -11,15 +11,15 @@ export class Mesa {
     public tipo;
     public id;
 
-    constructor(cliente: string, comensales: number, estado: string, numero: number, pedido: string, tipo: string,id?:string) {
+    constructor(comensales: number, estado: string, numero: number, tipo: string,id?:string,cliente?: string, pedido?: string) {
 
-        this.cliente = cliente;
         this.comensales = comensales;
         this.estado = estado;
         this.numero = numero;
-        this.pedido = pedido;
-        this.tipo = tipo;
-        if(id) this.id = id;
+        if(tipo) this.tipo = tipo; else this.tipo = null;
+        if(pedido) this.pedido = pedido; else this.pedido = null;
+        if(cliente) this.cliente = cliente; else this.cliente = null;
+        if(id) this.id = id; else this.id = null;
 
     }
 
