@@ -88,12 +88,14 @@ export class PerfilClienteComponent implements OnInit {
         case "ingreso":{
           if(this.verificaWaitingList()){
             this.muestraSwal("Sea paciente","warning","Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
-          }else{
+          }else if(this.usuarioBDActivo.enMesa != true){
             this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(),this.usuarioBDActivo.id).then(resp=>{
               this.muestraSwal("¡Bienvenido!","success","Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
             }).catch(error=>{
               this.muestraSwal("¡Error!","error","No pudo ingresar a la lista de espera. Contacte al dueño.");
             });
+          } else {
+            this.muestraSwal("¡Error!","warning","Ya tiene una mesa asignada. Escanee ese QR, este es el de ingreso al local.");
           }
           break;
         }

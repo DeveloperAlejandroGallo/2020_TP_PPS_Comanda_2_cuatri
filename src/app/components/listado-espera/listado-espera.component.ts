@@ -175,9 +175,7 @@ export class ListadoEsperaComponent implements OnInit {
 
   asignarMesa(cliente,mesa){
 
-    cliente.enMesa = true;
-    console.log(cliente);
-    console.log(cliente.toJson());
+    cliente.enMesa = mesa.numero;
     this.firestore.updateBD(cliente.id,cliente.toJson(),'usuarios').then(() =>{
       mesa.cliente = cliente.toJson();
       mesa.estado = 'ocupada';
