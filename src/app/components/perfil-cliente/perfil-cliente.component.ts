@@ -14,7 +14,7 @@ export class PerfilClienteComponent implements OnInit {
 
   usuarioActivoCorreo;
   usuariosBD;
-  usuarioBDActivo:Usuario;
+  usuarioBDActivo: Usuario;
   waitingList;
   enListaDeEspera = false;
   qrLeido;
@@ -43,10 +43,10 @@ export class PerfilClienteComponent implements OnInit {
         this.usuariosBD = [];
         for (let index = 0; index < resp.length; index++) {
           const element = resp[index];
-  
-          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto,element.payload.doc.id);
 
-          if(user.correo == this.usuarioActivoCorreo){
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto, element.payload.doc.id, element.payload.doc.data().enMesa);
+
+          if (user.correo == this.usuarioActivoCorreo) {
             console.log(user);
             this.usuarioBDActivo = user;
           }
@@ -60,7 +60,7 @@ export class PerfilClienteComponent implements OnInit {
         for (let index = 0; index < res.length; index++) {
           const element = res[index];
 
-          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto);
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto, element.payload.doc.id, element.payload.doc.data().enMesa);
 
           this.waitingList.push(user);
         }
@@ -78,53 +78,54 @@ export class PerfilClienteComponent implements OnInit {
 
 
 
-  escanear(){
-    this.barcode.scan(this.options).then(barcodeData=>{
-      this.qrLeido = barcodeData.text;
+  escanear() {
+    // this.barcode.scan(this.options).then(barcodeData => {
+    //   this.qrLeido = barcodeData.text;
 
-    // this.qrLeido = "ingreso";
+      this.qrLeido = "ingreso";
 
-      switch(this.qrLeido){
-        case "ingreso":{
-          if(this.verificaWaitingList()){
-            this.muestraSwal("Sea paciente","warning","Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
-          }else if(this.usuarioBDActivo.enMesa != true){
-            this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(),this.usuarioBDActivo.id).then(resp=>{
-              this.muestraSwal("¡Bienvenido!","success","Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
-            }).catch(error=>{
-              this.muestraSwal("¡Error!","error","No pudo ingresar a la lista de espera. Contacte al dueño.");
-            });
+      switch (this.qrLeido) {
+        case "ingreso": {
+          if (this.usuarioBDActivo.enMesa == null || this.usuarioBDActivo.enMesa == undefined) {
+            if (this.verificaWaitingList()) {
+              this.muestraSwal("Sea paciente", "warning", "Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
+            } else {
+              this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(), this.usuarioBDActivo.id).then(resp => {
+                this.muestraSwal("¡Bienvenido!", "success", "Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
+              }).catch(error => {
+                this.muestraSwal("¡Error!", "error", "No pudo ingresar a la lista de espera. Contacte al dueño.");
+              });
+            }
           } else {
-            this.muestraSwal("¡Error!","warning","Ya tiene una mesa asignada. Escanee ese QR, este es el de ingreso al local.");
+            this.muestraSwal("¡Error!", "error", "Ya tiene una mesa asignada. Escanee ese QR, este es el de ingreso al local.");
           }
           break;
         }
-        case "encuestas":{
-            break;
-          }
-          default:{
+        case "encuestas": {
+          break;
+        }
+        default: {
 
-            var nroMesa= this.qrLeido.substr(-1);
-           break; 
-          }
+          var nroMesa = this.qrLeido.substr(-1);
+          break;
+        }
       }
 
-    });
+    // });
   }
 
 
-  verificaWaitingList(){
+  verificaWaitingList() {
 
-    if(this.waitingList != null){
-  
+    if (this.waitingList != null) {
+
       let estaEnEspera = this.waitingList.filter(user => user.correo == this.usuarioActivoCorreo);
-      if (estaEnEspera.length == 1)
-      {
+      if (estaEnEspera.length == 1) {
 
         this.enListaDeEspera = true;
         return true;
       }
-      else{
+      else {
 
         this.enListaDeEspera = false;
         return false;
@@ -139,7 +140,7 @@ export class PerfilClienteComponent implements OnInit {
 
 
 
-  muestraSwal(titulo,icono,mensaje){
+  muestraSwal(titulo, icono, mensaje) {
 
     Swal.fire({
       title: titulo,
