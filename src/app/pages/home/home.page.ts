@@ -49,6 +49,7 @@ export class HomePage {
     if(e == 'clientes') this.navCtrl.navigateForward('/listing/'+e);
     if(e == 'espera') this.navCtrl.navigateForward('/listing/'+e);
     if(e == 'mesaCliente') this.navCtrl.navigateForward('/client');
+    if(e == 'pedidos') this.navCtrl.navigateForward('/listing/'+e);
 
   }
 

@@ -11,6 +11,7 @@ import { HomePageModule } from '../home/home.module';
 import { ListadoClientesComponent } from 'src/app/components/listado-clientes/listado-clientes.component';
 import { ListadoEsperaComponent } from 'src/app/components/listado-espera/listado-espera.component';
 import { ListadoProductosComponent } from 'src/app/components/listado-productos/listado-productos.component';
+import { ListadoPedidosComponent } from 'src/app/components/listado-pedidos/listado-pedidos.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ListadoProductosComponent } from 'src/app/components/listado-productos/
   declarations: [ListingPage,
     ListadoClientesComponent,
     ListadoEsperaComponent,
-    ListadoProductosComponent]
+    ListadoProductosComponent,
+    ListadoPedidosComponent]
 })
 export class ListingPageModule { }

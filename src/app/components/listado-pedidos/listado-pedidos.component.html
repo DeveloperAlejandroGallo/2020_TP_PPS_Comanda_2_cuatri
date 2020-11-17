@@ -1,0 +1,60 @@
+<div id="container">
+
+<ion-card class="ion-text-center card">
+
+  <ion-card-header>
+    <ion-card-title *ngIf="usuarioBDActivoTIPO == 'mozo'">PEDIDOS</ion-card-title>
+    <ion-card-title *ngIf="usuarioBDActivoTIPO == 'bartender'">BEBIDAS PENDIENTES</ion-card-title>
+    <ion-card-title *ngIf="usuarioBDActivoTIPO == 'cocinero'">PLATOS PENDIENTES</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <ion-grid class="grilla">
+
+      <ion-row>
+        <ion-col *ngIf="listadoProductosPedidosPorTipo == ''" size="12">
+          <p>Aún no hay pedidos que requieran preparación por parte del {{usuarioBDActivoTIPO}}.</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let item of listadoProductosPedidosPorTipo">
+
+        <ion-col size="4">
+          <img src="{{item.foto}}" alt="foto" style="margin: 1%;" width="60%">
+        </ion-col>
+
+        <ion-col size="6">
+          <p>{{item.nombre}} x{{item.cantidad}}</p>
+        </ion-col>
+
+        <!-- <ion-col size="2">
+          <p>${{item.precio*item.cantidad}}</p>
+        </ion-col> -->
+
+        <ion-col size="2">
+          <ion-button id="finalizar" size="small" color="success" (click)="finalizar(item)"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+            
+        </ion-col>
+
+      </ion-row>
+
+
+
+      <!-- <ion-row *ngFor="let item of listadoPlatos">
+        <ion-col size="12">
+          <img src="{{item.fotoUno}}" alt="fotoUno" style="margin: 1%;" width="30%"
+            (click)="opciones(item,item.fotoUno)">
+          <img src="{{item.fotoDos}}" alt="fotoDos" style="margin: 1%;" width="30%"
+            (click)="opciones(item,item.fotoDos)">
+          <img src="{{item.fotoTres}}" alt="fotoTres" style="margin: 1%;" width="30%"
+            (click)="opciones(item,item.fotoTres)">
+        </ion-col>
+      </ion-row> -->
+
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+
+</div>

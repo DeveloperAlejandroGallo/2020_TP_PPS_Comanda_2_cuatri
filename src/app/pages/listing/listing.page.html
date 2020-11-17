@@ -18,4 +18,8 @@
     <app-listado-productos [tipoListado]="this.tipoListado"></app-listado-productos>
   </div>
 
+  <div *ngIf="tipoListado == 'pedidos'">
+    <app-listado-pedidos [tipoListado]="this.tipoListado"></app-listado-pedidos>
+  </div>
+
 </ion-content>

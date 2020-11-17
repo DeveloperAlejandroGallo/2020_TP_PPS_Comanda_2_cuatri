@@ -25,6 +25,8 @@ export class ListadoProductosComponent implements OnInit {
 
   public productosPedidos=[];
   public productosPedidosIDs=[];
+  public productosPedidosEstados=[];
+  public cantidades=[];
   public totalPedido=0;
 
   @Input() tipoListado: string;
@@ -70,7 +72,6 @@ export class ListadoProductosComponent implements OnInit {
           user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto, element.payload.doc.id, element.payload.doc.data().enMesa);
 
           if (user.correo == this.usuarioActivoCorreo) {
-            console.log(user);
             this.usuarioBDActivo = user;
             this.usuarioBDActivoID = user.id;
           }
@@ -92,7 +93,6 @@ export class ListadoProductosComponent implements OnInit {
 
 
   opciones(producto, foto) {
-    console.log(producto);
 
     Swal.fire({
       title: producto.nombre,
@@ -126,11 +126,14 @@ export class ListadoProductosComponent implements OnInit {
 
   altaPedido(){
     this.productosPedidos.forEach(element => {
+      console.log(element);
       this.productosPedidosIDs.push(element.id);
+      this.productosPedidosEstados.push('pendiente');
+      this.cantidades.push(element.cantidad);
     });
 
-    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.totalPedido);
-    // console.log(pedido);
+    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.productosPedidosEstados,this.cantidades,'pendiente',this.totalPedido);
+    
     this.firestore.savePedidos(pedido.toJson()).then(resp=>{
       Swal.fire('Muchas gracias','Su pedido fue realizado y se está preparando','success').then(()=>this.navCtrl.navigateBack('/home'));
 
