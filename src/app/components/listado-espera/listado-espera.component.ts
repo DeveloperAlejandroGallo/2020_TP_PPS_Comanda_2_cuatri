@@ -195,30 +195,4 @@ export class ListadoEsperaComponent implements OnInit {
 
 
 
-  aprobarCliente(user) {
-
-    Swal.fire({
-      title: '¿Aprobar cliente?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: `Sí`,
-      denyButtonText: `No`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        user.aprobado = true;
-        this.firestore.updateUser(user.id, user.toJson()).then(() => {
-          Swal.fire('Cliente Aprobado!', '', 'success')
-        });
-      } else if (result.isDenied) {
-        user.aprobado = false;
-        this.firestore.updateUser(user.id, user.toJson()).then(() => {
-          Swal.fire('Cliente Rechazado', '', 'error')
-        });
-      }
-    })
-
-
-  }
-
-
 }

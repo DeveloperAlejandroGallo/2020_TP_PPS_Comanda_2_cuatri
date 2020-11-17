@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-client',
@@ -12,7 +13,7 @@ export class ClientPage implements OnInit {
   public pagina;
   public tipoProducto;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private navCtrl: NavController) { }
 
   ngOnInit() {
     // this.tipoProducto = this.route.snapshot.paramMap.get('producto');
@@ -20,9 +21,18 @@ export class ClientPage implements OnInit {
     
   }
 
-
   recibirPerfil(e){
     this.perfilUsuarioActivo = e;
   }
+
+    
+  recibirParametro(e){
+    //validar que llega a ver que se hace
+    if(e == 'menu') this.navCtrl.navigateForward('/listing/'+e);
+
+
+  }
+
+
 
 }

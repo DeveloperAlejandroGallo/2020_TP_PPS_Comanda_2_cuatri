@@ -51,7 +51,6 @@ export class LogInComponent implements OnInit {
     this.authService.currentUser().then(resp => {
       if (resp != null)
         this.usuarioActivo = true;
-      console.log(resp);
 
     }).catch(error => {
       this.usuarioActivo = false;
@@ -98,7 +97,7 @@ export class LogInComponent implements OnInit {
 
       console.log(resp);
       this.router.navigate(['/home']);    
-      // if(resp.user.emailVerified){
+      // if(resp.user.emailVerified || resp.user.email=='admin@admin.com'){
       //   console.log(resp);
       //   this.router.navigate(['/home']);
 
@@ -163,6 +162,11 @@ export class LogInComponent implements OnInit {
       case 'User6': {
         this.usuario = 'juancito@gmail.com';
         this.clave = 'juancito';
+        break;
+      }
+      case 'User7': {
+        this.usuario = 'milagrosp619@gmail.com';
+        this.clave = '123456';
         break;
       }
     }

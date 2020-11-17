@@ -38,9 +38,6 @@ export class PerfilClienteComponent implements OnInit {
 
       let user: Usuario;
 
-      console.log("en el constructor");
-      console.log(this.usuarioActivoCorreo);
-
       firestore.getUsuarios().subscribe((resp: any) => {
         this.usuariosBD = [];
         for (let index = 0; index < resp.length; index++) {

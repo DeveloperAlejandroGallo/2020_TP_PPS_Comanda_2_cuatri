@@ -14,4 +14,8 @@
     <app-listado-espera [tipoListado]="this.tipoListado"></app-listado-espera>
   </div>
 
+  <div *ngIf="tipoListado == 'menu'">
+    <app-listado-productos [tipoListado]="this.tipoListado"></app-listado-productos>
+  </div>
+
 </ion-content>

@@ -10,6 +10,7 @@ import { ListingPage } from './listing.page';
 import { HomePageModule } from '../home/home.module';
 import { ListadoClientesComponent } from 'src/app/components/listado-clientes/listado-clientes.component';
 import { ListadoEsperaComponent } from 'src/app/components/listado-espera/listado-espera.component';
+import { ListadoProductosComponent } from 'src/app/components/listado-productos/listado-productos.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ListadoEsperaComponent } from 'src/app/components/listado-espera/listad
   ],
   declarations: [ListingPage,
     ListadoClientesComponent,
-    ListadoEsperaComponent]
+    ListadoEsperaComponent,
+    ListadoProductosComponent]
 })
 export class ListingPageModule { }

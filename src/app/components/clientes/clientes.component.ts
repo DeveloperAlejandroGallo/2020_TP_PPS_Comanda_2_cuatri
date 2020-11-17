@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-clientes',
@@ -7,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientesComponent implements OnInit {
 
+  @Output() parametroEnviado : EventEmitter<string> = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {}
+
+  enviar(lugar){
+    this.parametroEnviado.emit(lugar);
+  }
+
 
 }

@@ -45,6 +45,8 @@ export class FirestoreService {
 
 
 
+
+
 //#region SAVE
 
   public saveUser(userJson) {
@@ -59,12 +61,7 @@ export class FirestoreService {
     // return this.firestore.collection(this.collectionListaEspera).add(userJson);
     
   }
-  
-  // public savePendientesAprobar(userJson) {
-  //   console.log("save pendientesAprobacion");
-  //   return this.firestore.collection(this.collectionPendientes).add(userJson);
 
-  // }
   
   public saveProductos(userJson) {
     console.log("save productos");
@@ -80,6 +77,8 @@ export class FirestoreService {
 
 
   //#endregion
+
+
 
 
 //#region UPDATE
@@ -98,17 +97,6 @@ export class FirestoreService {
   }
 
 
-  // updateTable(key: string, data) {
-  //   var tableRef = this.firestore.collection(this.collectionMesas).doc(key);
-
-  //   return tableRef.update(data)
-  //     .then(function () {
-  //       console.log("Document successfully updated!");
-  //     })
-  //     .catch(function (error) {
-  //       console.error("Error updating document: ", error);
-  //     });
-  // }
 
   updateBD(key: string, datos,collectionBD) {
     console.log(key);

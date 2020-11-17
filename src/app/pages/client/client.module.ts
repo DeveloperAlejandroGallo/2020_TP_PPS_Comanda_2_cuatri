@@ -8,6 +8,7 @@ import { ClientPageRoutingModule } from './client-routing.module';
 
 import { ClientPage } from './client.page';
 import { HomePageModule } from '../home/home.module';
+import { ClientesComponent } from 'src/app/components/clientes/clientes.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { HomePageModule } from '../home/home.module';
     ClientPageRoutingModule,
     HomePageModule
   ],
-  declarations: [ClientPage]
+  declarations: [ClientPage,
+  ClientesComponent]
 })
 export class ClientPageModule {}
