@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
+import { Usuario } from 'src/app/models/usuario';
+import { AuthenticationService } from 'src/app/servicios/authentication.service';
 import { FirestoreService } from 'src/app/servicios/firestore.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +18,13 @@ export class ListadoProductosComponent implements OnInit {
   public listadoBebidas;
   public listadoPlatos;
 
+  public usuarioActivoCorreo;
+  public usuarioBDActivo;
+  public usuarioBDActivoID;
+
+
   public productosPedidos=[];
+  public productosPedidosIDs=[];
   public totalPedido=0;
 
   @Input() tipoListado: string;
@@ -22,7 +32,8 @@ export class ListadoProductosComponent implements OnInit {
   public cantidad = 0;
 
 
-  constructor(private firestore: FirestoreService) {
+
+  constructor(private auth: AuthenticationService, private firestore: FirestoreService, private navCtrl:NavController) {
 
     let producto: Producto;
     firestore.getProductos().subscribe((resp: any) => {
@@ -32,7 +43,7 @@ export class ListadoProductosComponent implements OnInit {
       for (let index = 0; index < resp.length; index++) {
         const element = resp[index];
 
-        producto = new Producto(element.payload.doc.data().nombre, element.payload.doc.data().descripcion, element.payload.doc.data().tipo, element.payload.doc.data().tiempo, element.payload.doc.data().precio, element.payload.doc.data().fotoUno, element.payload.doc.data().fotoDos, element.payload.doc.data().fotoTres);
+        producto = new Producto(element.payload.doc.data().nombre, element.payload.doc.data().descripcion, element.payload.doc.data().tipo, element.payload.doc.data().tiempo, element.payload.doc.data().precio, element.payload.doc.data().fotoUno, element.payload.doc.data().fotoDos, element.payload.doc.data().fotoTres,element.payload.doc.data().cantidad, element.payload.doc.id);
 
         this.listadoProductos.push(producto);
 
@@ -42,10 +53,36 @@ export class ListadoProductosComponent implements OnInit {
           this.listadoPlatos.push(producto);
 
       }
-
-
-
     });
+
+
+
+    auth.currentUser().then(resp => {
+      this.usuarioActivoCorreo = resp.email;
+
+      let user: Usuario;
+
+      firestore.getUsuarios().subscribe((resp: any) => {
+        // this.usuariosBD = [];
+        for (let index = 0; index < resp.length; index++) {
+          const element = resp[index];
+
+          user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto, element.payload.doc.id, element.payload.doc.data().enMesa);
+
+          if (user.correo == this.usuarioActivoCorreo) {
+            console.log(user);
+            this.usuarioBDActivo = user;
+            this.usuarioBDActivoID = user.id;
+          }
+
+          // this.usuariosBD.push(user);
+        }
+      });
+
+
+    })
+
+
 
 
 
@@ -84,6 +121,26 @@ export class ListadoProductosComponent implements OnInit {
 
       }
     })
+  }
+
+
+  altaPedido(){
+    this.productosPedidos.forEach(element => {
+      this.productosPedidosIDs.push(element.id);
+    });
+
+    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.totalPedido);
+    // console.log(pedido);
+    this.firestore.savePedidos(pedido.toJson()).then(resp=>{
+      Swal.fire('Muchas gracias','Su pedido fue realizado y se está preparando','success').then(()=>this.navCtrl.navigateBack('/home'));
+
+    }).catch(error=>{
+      console.log(error);
+      Swal.fire('Error','Hubo un inconveniente en su pedido','error');
+
+    })
+
+
   }
 
 

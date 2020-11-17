@@ -12,6 +12,7 @@ export class FirestoreService {
   private collectionProductos="productos";
   private collectionEncuestas="encuestas";
   private collectionMesas="mesas";
+  private collectionPedidos="pedidos";
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -41,6 +42,10 @@ export class FirestoreService {
     return this.firestore.collection(this.collectionMesas).snapshotChanges();
   }
 
+  public getPedidos() {
+    return this.firestore.collection(this.collectionPedidos).snapshotChanges();
+  }
+
 //#endregion
 
 
@@ -63,15 +68,21 @@ export class FirestoreService {
   }
 
   
-  public saveProductos(userJson) {
+  public saveProductos(prodJson) {
     console.log("save productos");
-    return this.firestore.collection(this.collectionProductos).add(userJson);
+    return this.firestore.collection(this.collectionProductos).add(prodJson);
 
   }
   
-  public saveEncuestas(userJson) {
+  public saveEncuestas(encJson) {
     console.log("save encuestas");
-    return this.firestore.collection(this.collectionEncuestas).add(userJson);
+    return this.firestore.collection(this.collectionEncuestas).add(encJson);
+
+  }
+  
+  public savePedidos(pedidoJson) {
+    console.log("save pedidos");
+    return this.firestore.collection(this.collectionPedidos).add(pedidoJson);
 
   }
 
