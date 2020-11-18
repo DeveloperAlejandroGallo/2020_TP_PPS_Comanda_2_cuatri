@@ -8,17 +8,19 @@ export class Pedido {
     public mesa: number;
     public cliente: string;
     public productos: string[];
+    public nombres: string[];
     public estadoProductos: string[];
     public cantidades: number[];
     public estado: string;
     public total: number;
     public id: string;
 
-    constructor(mesa: number, cliente: string, productos: string[], estadoProductos: string[], cantidades: number[], estado: string, total: number, id?: string) {
+    constructor(mesa: number, cliente: string, productos: string[], nombres: string[], estadoProductos: string[], cantidades: number[], estado: string, total: number, id?: string) {
 
         this.mesa = mesa;
         this.cliente = cliente;
         this.productos = productos;
+        this.nombres = nombres;
         this.estadoProductos = estadoProductos;
         this.cantidades = cantidades;
         this.estado = estado;
@@ -29,9 +31,9 @@ export class Pedido {
 
     toJson() {
         if (this.id)
-            return { "mesa": this.mesa, "cliente": this.cliente, "productos": this.productos, "estadoProductos": this.estadoProductos, "cantidades": this.cantidades, "estado": this.estado, "total": this.total, "id": this.id }
+            return { "mesa": this.mesa, "cliente": this.cliente, "productos": this.productos, "nombres": this.nombres, "estadoProductos": this.estadoProductos, "cantidades": this.cantidades, "estado": this.estado, "total": this.total, "id": this.id }
         else
-            return { "mesa": this.mesa, "cliente": this.cliente, "productos": this.productos, "estadoProductos": this.estadoProductos, "cantidades": this.cantidades, "estado": this.estado, "total": this.total }
+            return { "mesa": this.mesa, "cliente": this.cliente, "productos": this.productos, "nombres": this.nombres, "estadoProductos": this.estadoProductos, "cantidades": this.cantidades, "estado": this.estado, "total": this.total }
 
     }
 

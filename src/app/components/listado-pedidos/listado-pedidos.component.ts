@@ -14,16 +14,20 @@ import Swal from 'sweetalert2';
 })
 export class ListadoPedidosComponent implements OnInit {
 
-  public listadoProductos=[];
-  public listadoBebidas=[];
-  public listadoPlatos=[];
-  
-  public listadoPedidos=[];
+  public listadoProductos = [];
+  public listadoBebidas = [];
+  public listadoPlatos = [];
 
-  public listadoProductosPedidos=[];
-  public listadoProductosPedidosPorTipo=[];
-  public listadoBebidasPedidos=[];
-  public listadoPlatosPedidos=[];
+  public listadoPedidos = [];
+  public listadoPedidosNoCerrados = [];
+  public listadoPedidosPendientes = [];
+
+  public listadoProductosPedidos = [];
+  public listadoProductosPedidosPorTipo = [];
+  public listadoBebidasPedidos = [];
+  public listadoPlatosPedidos = [];
+
+  public listProductosPorPedido = [];
 
   public usuarioActivoCorreo;
   public usuarioBDActivo;
@@ -31,8 +35,8 @@ export class ListadoPedidosComponent implements OnInit {
 
   @Input() tipoListado: string;
 
-  
-  constructor(private auth: AuthenticationService, private firestore: FirestoreService, private navCtrl:NavController) {
+
+  constructor(private auth: AuthenticationService, private firestore: FirestoreService, private navCtrl: NavController) {
 
     let producto: Producto;
     firestore.getProductos().subscribe((resp: any) => {
@@ -41,7 +45,7 @@ export class ListadoPedidosComponent implements OnInit {
       this.listadoPlatos = [];
       for (let index = 0; index < resp.length; index++) {
         const element = resp[index];
-        producto = new Producto(element.payload.doc.data().nombre, element.payload.doc.data().descripcion, element.payload.doc.data().tipo, element.payload.doc.data().tiempo, element.payload.doc.data().precio, element.payload.doc.data().fotoUno, element.payload.doc.data().fotoDos, element.payload.doc.data().fotoTres,element.payload.doc.data().cantidad, element.payload.doc.id);
+        producto = new Producto(element.payload.doc.data().nombre, element.payload.doc.data().descripcion, element.payload.doc.data().tipo, element.payload.doc.data().tiempo, element.payload.doc.data().precio, element.payload.doc.data().fotoUno, element.payload.doc.data().fotoDos, element.payload.doc.data().fotoTres, element.payload.doc.data().cantidad, element.payload.doc.id);
         this.listadoProductos.push(producto);
 
         if (producto.tipo == 'bebida')
@@ -51,20 +55,26 @@ export class ListadoPedidosComponent implements OnInit {
       }
       console.log("cargo productos");
     });
-    
 
-    let pedido:Pedido;
-    firestore.getPedidos().subscribe((resp:any)=>{
-      this.listadoPedidos=[];
+
+    let pedido: Pedido;
+    firestore.getPedidos().subscribe((resp: any) => {
+      this.listadoPedidos = [];
+      this.listadoPedidosNoCerrados=[];
+      this.listadoPedidosPendientes=[];
       for (let index = 0; index < resp.length; index++) {
         const element = resp[index];
-        pedido = new Pedido(element.payload.doc.data().mesa,element.payload.doc.data().cliente,element.payload.doc.data().productos,element.payload.doc.data().estadoProductos,element.payload.doc.data().cantidades,element.payload.doc.data().estado, element.payload.doc.data().total,element.payload.doc.id);
-        this.listadoPedidos.push(pedido);    
+        pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().total, element.payload.doc.id);
+        this.listadoPedidos.push(pedido);
+        if (pedido.estado != 'cerrado')
+          this.listadoPedidosNoCerrados.push(pedido);
+        if (pedido.estado == 'pendiente')
+          this.listadoPedidosPendientes.push(pedido);
       }
       this.decidirPedidoQueCorresponde();
       console.log("cargo pedidos");
     });
-    
+
     auth.currentUser().then(resp => {
       this.usuarioActivoCorreo = resp.email;
       let user: Usuario;
@@ -83,22 +93,22 @@ export class ListadoPedidosComponent implements OnInit {
     });
 
 
-   }
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 
-  decidirPedidoQueCorresponde(){
-    this.listadoProductosPedidos=[];
-    this.listadoProductosPedidosPorTipo=[];
-    this.listadoPedidos.forEach(element => {  // cada pedido
+  decidirPedidoQueCorresponde() {
+    this.listadoProductosPedidos = [];
+    this.listadoProductosPedidosPorTipo = [];
+    this.listadoPedidosPendientes.forEach(element => {  // cada pedido
       let producto;
       let obj;
       for (let index = 0; index < element.productos.length; index++) { // cada producto del pedido
         const pedProd = element.productos[index];
         for (let indice = 0; indice < this.listadoProductos.length; indice++) { // recorro todos los productos
           const prodProductos = this.listadoProductos[indice];
-          if(prodProductos.id == pedProd){ // cuando encuentro el id del producto del pedido en productos
+          if (prodProductos.id == pedProd) { // cuando encuentro el id del producto del pedido en productos
             obj = new Object();
             obj.idProducto = pedProd;
             obj.nombre = prodProductos.nombre;
@@ -117,11 +127,11 @@ export class ListadoPedidosComponent implements OnInit {
     this.listadoProductosPedidos.forEach(element => {
       // console.log(this.usuarioBDActivoTIPO);
       // console.log(element.tipoProd);
-      if(element.estadoProducto == 'pendiente'){
-        if(element.tipoProd == 'bebida' && this.usuarioBDActivoTIPO == 'bartender')
-        this.listadoProductosPedidosPorTipo.push(element);
-        if(element.tipoProd == 'plato' && this.usuarioBDActivoTIPO == 'cocinero')
-        this.listadoProductosPedidosPorTipo.push(element);
+      if (element.estadoProducto == 'pendiente') {
+        if (element.tipoProd == 'bebida' && this.usuarioBDActivoTIPO == 'bartender')
+          this.listadoProductosPedidosPorTipo.push(element);
+        if (element.tipoProd == 'plato' && this.usuarioBDActivoTIPO == 'cocinero')
+          this.listadoProductosPedidosPorTipo.push(element);
       }
     });
 
@@ -130,24 +140,25 @@ export class ListadoPedidosComponent implements OnInit {
 
   }
 
-  finalizar(producto){
+
+  finalizar(producto) {
 
     // let todoListo=false;
     producto.estadoProducto = 'finalizado';
 
-    this.listadoPedidos.forEach(element => {
-      if(element.id == producto.idPedido){  // busco el pedido para actualizar el estado del producto en la BD
+    this.listadoPedidosPendientes.forEach(element => {
+      if (element.id == producto.idPedido) {  // busco el pedido para actualizar el estado del producto en la BD
         for (let index = 0; index < element.productos.length; index++) {
           const productoDelPedido = element.productos[index];
-          if(productoDelPedido == producto.idProducto && element.estadoProductos[index]=='pendiente'){
-            element.estadoProductos[index]='finalizado';
+          if (productoDelPedido == producto.idProducto && element.estadoProductos[index] == 'pendiente') {
+            element.estadoProductos[index] = 'finalizado';
 
-            Swal.fire('Perfecto!','Terminó la preparación del producto correctamente.','success');
-            this.firestore.updateBD(element.id,element.toJson(),'pedidos').then(res=>{
+            Swal.fire('Perfecto!', 'Terminó la preparación del producto correctamente.', 'success');
+            this.firestore.updateBD(element.id, element.toJson(), 'pedidos').then(res => {
               console.log("Magicamente funcionó");
 
-            }).catch(err=>{
-              console.log("Era más lógico que rompa: " +err);
+            }).catch(err => {
+              console.log("Era más lógico que rompa: " + err);
             })
 
             break;
@@ -156,16 +167,20 @@ export class ListadoPedidosComponent implements OnInit {
       }
     });
 
-    // this.firestore.updateBD(producto.)
-
-
-
   }
 
 
 
 
 
+  confirmar(pedido){
+    pedido.estado='pendiente';
+    this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
+      Swal.fire('Muchas gracias','El pedido fue confirmado y se enviará a los sectores correspondientes');
+    });
+  }
+
+  
 
 
 
