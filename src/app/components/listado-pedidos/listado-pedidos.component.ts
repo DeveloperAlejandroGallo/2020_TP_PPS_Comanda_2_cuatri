@@ -156,6 +156,7 @@ export class ListadoPedidosComponent implements OnInit {
             Swal.fire('Perfecto!', 'Terminó la preparación del producto correctamente.', 'success');
             this.firestore.updateBD(element.id, element.toJson(), 'pedidos').then(res => {
               console.log("Magicamente funcionó");
+              this.verificarEstadoFinal(element.id);
 
             }).catch(err => {
               console.log("Era más lógico que rompa: " + err);
@@ -170,13 +171,33 @@ export class ListadoPedidosComponent implements OnInit {
   }
 
 
+  verificarEstadoFinal(idPedido){
+    let todoListo=true;
+    this.listadoPedidos.forEach(element => {
+      if(element.id == idPedido){
+        element.estadoProductos.forEach(estados => {
+          if(estados != 'finalizado'){
+            todoListo=false;
+          }
+        });
+        if(todoListo){
+          element.estado='finalizado';
+          this.firestore.updateBD(element.id,element.toJson(),'pedidos').then(res=>{
+            console.log("pedido listo para ser entregado");
+          });
+        }
+      }
+    });
+  }
+
+
 
 
 
   confirmar(pedido){
     pedido.estado='pendiente';
     this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
-      Swal.fire('Muchas gracias','El pedido fue confirmado y se enviará a los sectores correspondientes');
+      Swal.fire('Muchas gracias','El pedido fue confirmado y se enviará a los sectores correspondientes','success');
     });
   }
 
