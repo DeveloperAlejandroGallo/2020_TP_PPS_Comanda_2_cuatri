@@ -9,6 +9,7 @@ import { SurveysPageRoutingModule } from './surveys-routing.module';
 import { SurveysPage } from './surveys.page';
 import { HomePageModule } from '../home/home.module';
 import { EncuestaEmpleadoComponent } from 'src/app/components/encuesta-empleado/encuesta-empleado.component';
+import { EncuestaClienteComponent } from 'src/app/components/encuesta-cliente/encuesta-cliente.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { EncuestaEmpleadoComponent } from 'src/app/components/encuesta-empleado/
     HomePageModule
   ],
   declarations: [SurveysPage,
-  EncuestaEmpleadoComponent]
+    EncuestaEmpleadoComponent,
+    EncuestaClienteComponent]
 })
-export class SurveysPageModule {}
+export class SurveysPageModule { }

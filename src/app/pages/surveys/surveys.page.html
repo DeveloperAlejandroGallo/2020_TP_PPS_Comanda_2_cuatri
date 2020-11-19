@@ -13,5 +13,9 @@
     <app-encuesta-empleado [perfilResponde]="this.perfilUsuarioActivo"></app-encuesta-empleado>
   </div>
 
+  <div *ngIf="perfilUsuarioActivo == 'cliente'">
+    <app-encuesta-cliente [perfilResponde]="this.perfilUsuarioActivo"></app-encuesta-cliente>
+  </div>
+
 
 </ion-content>

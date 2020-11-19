@@ -30,6 +30,8 @@ export class ClientPage implements OnInit {
     //validar que llega a ver que se hace
     if(e == 'menu') this.navCtrl.navigateForward('/listing/'+e);
     if(e == 'pedidos') this.navCtrl.navigateForward('/listing/'+e);
+    // if(e == 'cliente') this.navCtrl.navigateForward('/surveys');
+
 
 
   }
