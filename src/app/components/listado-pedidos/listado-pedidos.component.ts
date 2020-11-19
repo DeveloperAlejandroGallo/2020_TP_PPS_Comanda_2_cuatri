@@ -205,8 +205,25 @@ export class ListadoPedidosComponent implements OnInit {
 
   confirmar(pedido){
     pedido.estado='pendiente';
+    Swal.fire('Muchas gracias','El pedido fue confirmado y se enviará a los sectores correspondientes','success');
     this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
-      Swal.fire('Muchas gracias','El pedido fue confirmado y se enviará a los sectores correspondientes','success');
+      console.log("recibido");
+    });
+  }
+  
+  entregar(pedido){
+    pedido.estado='entregado';
+    Swal.fire('Muchas gracias','El pedido fue entregado y el cliente debe confirmarlo','success');
+    this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
+      console.log("recibido");
+    });
+  }
+  
+  recibir(pedido){
+    pedido.estado='recibido';
+    Swal.fire('Muchas gracias','Se confirmó la recepción del pedido','success');
+    this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
+      console.log("recibido");
     });
   }
 
