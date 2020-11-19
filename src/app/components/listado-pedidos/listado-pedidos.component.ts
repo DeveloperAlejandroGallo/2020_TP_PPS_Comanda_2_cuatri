@@ -21,17 +21,20 @@ export class ListadoPedidosComponent implements OnInit {
   public listadoPedidos = [];
   public listadoPedidosNoCerrados = [];
   public listadoPedidosPendientes = [];
-
+  
   public listadoProductosPedidos = [];
   public listadoProductosPedidosPorTipo = [];
   public listadoBebidasPedidos = [];
   public listadoPlatosPedidos = [];
-
+  
   public listProductosPorPedido = [];
-
+  
   public usuarioActivoCorreo;
   public usuarioBDActivo;
   public usuarioBDActivoTIPO;
+  public usuarioBDActivoMESA;
+  
+  public pedidosDelCliente = [];
 
   @Input() tipoListado: string;
 
@@ -62,6 +65,7 @@ export class ListadoPedidosComponent implements OnInit {
       this.listadoPedidos = [];
       this.listadoPedidosNoCerrados=[];
       this.listadoPedidosPendientes=[];
+      this.pedidosDelCliente=[];
       for (let index = 0; index < resp.length; index++) {
         const element = resp[index];
         pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().total, element.payload.doc.id);
@@ -70,7 +74,9 @@ export class ListadoPedidosComponent implements OnInit {
           this.listadoPedidosNoCerrados.push(pedido);
         if (pedido.estado == 'pendiente')
           this.listadoPedidosPendientes.push(pedido);
-      }
+
+        }
+      this.pedidosDelCliente = this.listadoPedidosNoCerrados.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
       this.decidirPedidoQueCorresponde();
       console.log("cargo pedidos");
     });
@@ -83,9 +89,12 @@ export class ListadoPedidosComponent implements OnInit {
           const element = resp[index];
           user = new Usuario(element.payload.doc.data().nombre, element.payload.doc.data().apellido, element.payload.doc.data().dni, element.payload.doc.data().sexo, element.payload.doc.data().correo, element.payload.doc.data().perfil, element.payload.doc.data().tipo, element.payload.doc.data().aprobado, null, element.payload.doc.data().foto, element.payload.doc.id, element.payload.doc.data().enMesa);
           if (user.correo == this.usuarioActivoCorreo) {
-            console.log(user);
             this.usuarioBDActivo = user;
             this.usuarioBDActivoTIPO = this.usuarioBDActivo.tipo;
+            this.usuarioBDActivoMESA = this.usuarioBDActivo.enMesa;
+
+            this.pedidosDelCliente = this.listadoPedidosNoCerrados.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
+            this.pedidosDelCliente = this.listadoPedidosNoCerrados.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
           }
         }
       });

@@ -29,6 +29,7 @@ export class ClientPage implements OnInit {
   recibirParametro(e){
     //validar que llega a ver que se hace
     if(e == 'menu') this.navCtrl.navigateForward('/listing/'+e);
+    if(e == 'pedidos') this.navCtrl.navigateForward('/listing/'+e);
 
 
   }
