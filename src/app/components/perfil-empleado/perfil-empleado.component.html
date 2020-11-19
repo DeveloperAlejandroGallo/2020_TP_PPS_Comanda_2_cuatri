@@ -11,8 +11,8 @@
       <div *ngIf="tipoUsuarioActivo=='metre'"><!-- HAY QUE ARREGLAR EL ALTA DE CLIENTE, ¿qué pasa despues que un METRE le da el alta? -->
       <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/cliente.png" (click)="enviar('cliente')"></ion-button>
       </div>
-      <div *ngIf="tipoUsuarioActivo=='mozo'"><!-- FALTA -->
-      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/estadoMesas.png" (click)="enviar('listaMesas')"></ion-button>
+      <div *ngIf="tipoUsuarioActivo=='mozo'">
+      <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/estadoMesas.png" (click)="enviar('mesas')"></ion-button>
       </div>
       <div *ngIf="tipoUsuarioActivo=='bartender'">
       <ion-button color="light" style="display: flex; flex-direction: column;"><img width="100%" style="margin: 4%;" src="../../../assets/imagenes/bebidaNueva.png" (click)="enviar('bebida')"></ion-button>

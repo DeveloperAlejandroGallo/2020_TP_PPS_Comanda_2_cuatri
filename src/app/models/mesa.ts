@@ -7,24 +7,24 @@ export class Mesa {
     public comensales;
     public estado;
     public numero;
-    public pedido;
+    public consulta;
     public tipo;
     public id;
 
-    constructor(comensales: number, estado: string, numero: number, tipo: string,id?:string,cliente?: string, pedido?: string) {
+    constructor(comensales: number, estado: string, numero: number, tipo: string,id?:string,cliente?: string, consulta?: string) {
 
         this.comensales = comensales;
         this.estado = estado;
         this.numero = numero;
         if(tipo) this.tipo = tipo; else this.tipo = null;
-        if(pedido) this.pedido = pedido; else this.pedido = null;
+        if(consulta) this.consulta = consulta; else this.consulta = null;
         if(cliente) this.cliente = cliente; else this.cliente = null;
         if(id) this.id = id; else this.id = null;
 
     }
 
     toJson(){
-        return{"cliente": this.cliente, "comensales": this.comensales, "estado": this.estado, "numero": this.numero, "pedido": this.pedido, "tipo": this.tipo, "id":this.id}
+        return{"cliente": this.cliente, "comensales": this.comensales, "estado": this.estado, "numero": this.numero, "consulta": this.consulta, "tipo": this.tipo, "id":this.id}
     }
 
 

@@ -39,9 +39,9 @@ export class ListadoEsperaComponent implements OnInit {
       this.listadoMesas = [];
       for (let index = 0; index < res.length; index++) {
         const element = res[index];
-        mesa = new Mesa(element.payload.doc.data().comensales, element.payload.doc.data().estado, element.payload.doc.data().numero, element.payload.doc.data().tipo, element.payload.doc.id, element.payload.doc.data().cliente, element.payload.doc.data().pedido);
+        mesa = new Mesa(element.payload.doc.data().comensales, element.payload.doc.data().estado, element.payload.doc.data().numero, element.payload.doc.data().tipo, element.payload.doc.id, element.payload.doc.data().cliente, element.payload.doc.data().consulta);
 
-        this.listadoMesas.push(user);
+        this.listadoMesas.push(mesa);
         if (mesa.estado == "libre") this.listadoMesasLibres.push(mesa);
       }
       // this.listadoMesasLibres = this.listadoMesas.filter(mesa => mesa.estado == "libre");

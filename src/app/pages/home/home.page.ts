@@ -46,10 +46,12 @@ export class HomePage {
     //validar que llega a ver que se hace
     if(e == 'cliente') this.navCtrl.navigateForward('/register/'+e); // ?
     if(e == 'bebida' || e == 'plato') this.navCtrl.navigateForward('/create/'+e);
+    if(e == 'mesaCliente') this.navCtrl.navigateForward('/client');
+    
     if(e == 'clientes') this.navCtrl.navigateForward('/listing/'+e);
     if(e == 'espera') this.navCtrl.navigateForward('/listing/'+e);
-    if(e == 'mesaCliente') this.navCtrl.navigateForward('/client');
     if(e == 'pedidos') this.navCtrl.navigateForward('/listing/'+e);
+    if(e == 'mesas') this.navCtrl.navigateForward('/listing/'+e);
 
   }
 

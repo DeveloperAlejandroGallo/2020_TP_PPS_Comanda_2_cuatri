@@ -12,6 +12,7 @@ import { ListadoClientesComponent } from 'src/app/components/listado-clientes/li
 import { ListadoEsperaComponent } from 'src/app/components/listado-espera/listado-espera.component';
 import { ListadoProductosComponent } from 'src/app/components/listado-productos/listado-productos.component';
 import { ListadoPedidosComponent } from 'src/app/components/listado-pedidos/listado-pedidos.component';
+import { ListadoMesasComponent } from 'src/app/components/listado-mesas/listado-mesas.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListadoPedidosComponent } from 'src/app/components/listado-pedidos/list
     ListadoClientesComponent,
     ListadoEsperaComponent,
     ListadoProductosComponent,
-    ListadoPedidosComponent]
+    ListadoPedidosComponent,
+    ListadoMesasComponent]
 })
 export class ListingPageModule { }
