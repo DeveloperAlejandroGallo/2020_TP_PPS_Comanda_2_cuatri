@@ -21,8 +21,21 @@ export class FirestoreService {
 
   }
 
+  public setData(collection, data, id) {
+    return this.firestore.collection(collection).doc(id).valueChanges();
+  }
 
 
+  public getDevices(collection) {
+    return this.firestore.collection(collection).snapshotChanges();
+  }
+
+  public getOne(collection, id) {
+    return this.firestore.collection(collection).doc(id).get().toPromise();
+  }
+
+
+  
 
   // public getUsuarioByCorreo(mail){
   //   this.firestore.collection("usuarios").snapshotChanges().subscribe()

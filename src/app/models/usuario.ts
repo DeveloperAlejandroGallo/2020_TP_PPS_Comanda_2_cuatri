@@ -31,5 +31,10 @@ export class Usuario {
         return{ "nombre":this.nombre, "apellido":this.apellido, "dni":this.dni, "sexo":this.sexo, "cuil":this.cuil, "foto":this.foto, "perfil":this.perfil, "tipo":this.tipo, "correo":this.correo, "aprobado":this.aprobado }
     }
 
+    
+    public get Perfil() : string {
+        return this.perfil
+    }
+    
 
 }
