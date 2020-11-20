@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil-empleado',
@@ -7,8 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilEmpleadoComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
+  @Input() tipoUsuarioActivo: string;
+  @Output() parametroEnviado : EventEmitter<string> = new EventEmitter<string>();
+
+
+  constructor(private navCtrl: NavController) { 
+  }
+
+  ngOnInit() {
+  }
+
+
+  public enviar(perfil){
+    this.parametroEnviado.emit(perfil);
+  }
+
+
+  public encuesta(){
+    this.navCtrl.navigateForward('/surveys');
+  }
+
+
+
+
+
+
 
 }

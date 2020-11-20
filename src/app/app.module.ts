@@ -24,9 +24,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 @NgModule({
   declarations: [
     AppComponent,
-    // NavbarComponent
-    // LogInComponent,
-    // SignUpComponent
   ],
   entryComponents: [],
   // exports:[NavbarComponent],

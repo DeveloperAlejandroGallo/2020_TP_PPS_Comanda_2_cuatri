@@ -19,7 +19,6 @@ export class LogInComponent implements OnInit {
   clave: string;
   usuariosBD = [];
   usuariosClientes = [];
-  clientes;
   public usuarioActivo = false;
   emailVerificado = null;
 
@@ -36,17 +35,10 @@ export class LogInComponent implements OnInit {
         this.usuariosBD.push(user);
       }
 
-      // console.log(this.usuariosBD);
 
-      // for (let index = 0; index < this.usuariosBD.length; index++) {
-      //   const element = this.usuariosBD[index];
-      //   if (element.perfil == "cliente")
-      //     this.usuariosClientes.push(element);
-      // }
       this.usuariosClientes = this.usuariosBD.filter(user => user.perfil == "cliente");
 
 
-      // console.log(this.usuariosClientes);
 
     });
 
@@ -59,7 +51,6 @@ export class LogInComponent implements OnInit {
     this.authService.currentUser().then(resp => {
       if (resp != null)
         this.usuarioActivo = true;
-      console.log(resp);
 
     }).catch(error => {
       this.usuarioActivo = false;
@@ -77,9 +68,6 @@ export class LogInComponent implements OnInit {
 
 
 
-
-
-
   validarUsuario() {
 
     let esCliente = this.usuariosClientes.filter(user => user.correo == this.usuario);
@@ -94,7 +82,7 @@ export class LogInComponent implements OnInit {
         }, 2500);
       }
     } else
-    this.loguearUsuario();
+      this.loguearUsuario();
 
   }
 
@@ -103,19 +91,28 @@ export class LogInComponent implements OnInit {
 
   loguearUsuario() {
     this.authService.iniciarSesion(this.usuario, this.clave).then(resp => {
+   
+      
+      // DESCOMENTAR cuando carguemos datos reales y borrar las dos lineas de acá abajo
 
       console.log(resp);
-      let aux = resp;
-      this.router.navigate(['/home']);
-
-      // emailVerified
-      // this.emailVerificado=aux.user.emailVerified;
-      // if(this.emailVerificado==true){
+      this.router.navigate(['/home']);    
+      // if(resp.user.emailVerified || resp.user.email=='admin@admin.com'){
+      //   console.log(resp);
       //   this.router.navigate(['/home']);
-      // } else {
-      //   this.mensaje="Falta verificar la cuenta. Por favor revise su correo";
-      //   this.mostrar=true;
+
+      // }else{
+
+      //   this.authService.cerrarSesion().then(res=>{});
+      //   this.mensaje = "Falta verificar el correo. Ingrese a su casilla o revise en Correo No Deseado.";
+      //   this.mostrar = true;
+      //   setTimeout(() => {
+      //     this.mostrar = false;
+      //   }, 2500);
+
+
       // }
+
 
     }).catch(error => {
       console.log(error);
@@ -129,6 +126,9 @@ export class LogInComponent implements OnInit {
 
 
 
+  registrarUsuario() {
+    this.router.navigate(['/register/cliente']);
+  }
 
 
 
@@ -145,18 +145,28 @@ export class LogInComponent implements OnInit {
         break;
       }
       case 'User3': {
-        this.usuario = 'usuario@usuario.com';
-        this.clave = '333333';
+        this.usuario = 'mili@mili.com';
+        this.clave = '123123';
         break;
       }
       case 'User4': {
-        this.usuario = 'anonimo@anonimo.com';
-        this.clave = '444444';
+        this.usuario = 'cocosalsero@anonimo.com';
+        this.clave = 'cocosalsero';
         break;
       }
       case 'User5': {
-        this.usuario = 'tester@tester.com';
-        this.clave = '555555';
+        this.usuario = 'miledupi@hotmail.com';
+        this.clave = '123123';
+        break;
+      }
+      case 'User6': {
+        this.usuario = 'juancito@gmail.com';
+        this.clave = 'juancito';
+        break;
+      }
+      case 'User7': {
+        this.usuario = 'milagrosp619@gmail.com';
+        this.clave = '123456';
         break;
       }
     }

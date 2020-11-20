@@ -8,5 +8,6 @@ export const environment = {
     storageBucket: "comanda-encuarentenados.appspot.com",
     messagingSenderId: "737699765257",
     appId: "1:737699765257:web:2130d4d662101e27232cd8"
-  }
+  },
+  urlVerify:"http://localhost:8100"
 };

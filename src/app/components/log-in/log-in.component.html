@@ -29,8 +29,8 @@
             </div>
 
             <div class="form-group row">
-            <ion-button style="margin-bottom: 5%;" size="large" color="warning" (click)="validarUsuario()"><strong>Ingresar</strong>
-            </ion-button>
+            <ion-button style="margin-bottom: 5%;" size="large" color="warning" (click)="validarUsuario()"><strong>Ingresar</strong></ion-button>
+            <ion-button style="margin-bottom: 5%;" size="large" color="tertiary" (click)="registrarUsuario()"><strong>Registrar</strong></ion-button>
           </div>
 
 
@@ -58,11 +58,13 @@
         <ion-icon name="people-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="bottom">
-        <ion-fab-button (click)="cargarUser('User1')">D1</ion-fab-button>
-        <ion-fab-button (click)="cargarUser('User2')"><ion-icon name="person-add-sharp"></ion-icon></ion-fab-button>
-        <ion-fab-button (click)="cargarUser('User3')"><ion-icon name="body-sharp"></ion-icon></ion-fab-button>
-        <ion-fab-button (click)="cargarUser('User4')"><ion-icon name="help-circle-sharp"></ion-icon></ion-fab-button>
-        <ion-fab-button (click)="cargarUser('User5')"><ion-icon name="bug-sharp"></ion-icon></ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User1')">DU</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User2')">CL</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User3')">BT</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User4')">AN</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User5')">MO</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User6')">ME</ion-fab-button>
+        <ion-fab-button (click)="cargarUser('User7')">CO</ion-fab-button>
         <!-- <ion-fab-button (click)="cargarUser('User1')"><ion-icon name="construct-sharp"></ion-icon></ion-fab-button>
         <ion-fab-button (click)="cargarUser('User2')"><ion-icon name="person-add-sharp"></ion-icon></ion-fab-button>
         <ion-fab-button (click)="cargarUser('User3')"><ion-icon name="body-sharp"></ion-icon></ion-fab-button>
