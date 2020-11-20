@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "737699765257",
+    "firebase_url": "https://comanda-encuarentenados.firebaseio.com",
+    "project_id": "comanda-encuarentenados",
+    "storage_bucket": "comanda-encuarentenados.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737699765257:android:5ade8e36ac5efa93232cd8",
+        "android_client_info": {
+          "package_name": "io.ionic.comanda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737699765257-da43stuo9hhvr5gvdkbn78vfg62uc6if.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkkM6TPTZ7BAOzMKGNDKWlia0SlG0TCe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737699765257-da43stuo9hhvr5gvdkbn78vfg62uc6if.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

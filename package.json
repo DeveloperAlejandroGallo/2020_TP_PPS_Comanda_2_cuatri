@@ -87,11 +87,8 @@
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-<<<<<<< HEAD
-      "cordova-plugin-fcm-with-dependecy-updated": {}
-=======
+      "cordova-plugin-fcm-with-dependecy-updated": {},
       "cordova-plugin-firebase": {}
->>>>>>> develop
     },
     "platforms": [
       "android"
