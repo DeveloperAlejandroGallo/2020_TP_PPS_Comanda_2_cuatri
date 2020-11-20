@@ -71,6 +71,10 @@ export class ClientesComponent implements OnInit {
     this.navCtrl.navigateForward('/surveys');
   }
 
+  public cuenta(){
+    this.navCtrl.navigateForward('/bill');
+  }
+
 
   hacerConsulta(){
 
@@ -110,6 +114,11 @@ export class ClientesComponent implements OnInit {
 
   }
 
+
+
+  jugar(algo){
+    Swal.fire('Lo sentimos','Aún no hay juegos disponibles','error');
+  }
 
 
 }

@@ -27,6 +27,7 @@ export class ListadoProductosComponent implements OnInit {
   public productosPedidosIDs=[];
   public productosPedidosNombre=[];
   public productosPedidosEstados=[];
+  public productosPedidosPrecio=[];
   public cantidades=[];
   public totalPedido=0;
 
@@ -110,7 +111,7 @@ export class ListadoProductosComponent implements OnInit {
     }).then(result => {
       if (result.isConfirmed) {
         if (result.value) {
-          producto.cantidad = result.value;
+          producto.cantidad = Number(result.value);
           this.productosPedidos.push(producto);
           this.calcularTotal();
 
@@ -130,11 +131,12 @@ export class ListadoProductosComponent implements OnInit {
       console.log(element);
       this.productosPedidosIDs.push(element.id);
       this.productosPedidosNombre.push(element.nombre);
+      this.productosPedidosPrecio.push(element.precio);
       this.productosPedidosEstados.push('pendiente');
       this.cantidades.push(element.cantidad);
     });
 
-    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.productosPedidosNombre,this.productosPedidosEstados,this.cantidades,'noaprobado',this.totalPedido);
+    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.productosPedidosNombre,this.productosPedidosEstados,this.cantidades,'noaprobado',this.productosPedidosPrecio,null,this.totalPedido);
     
     this.firestore.savePedidos(pedido.toJson()).then(resp=>{
       Swal.fire('Muchas gracias','Su pedido fue realizado y se está preparando','success').then(()=>this.navCtrl.navigateBack('/home'));

@@ -68,7 +68,7 @@ export class ListadoPedidosComponent implements OnInit {
       this.pedidosDelCliente=[];
       for (let index = 0; index < resp.length; index++) {
         const element = resp[index];
-        pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().total, element.payload.doc.id);
+        pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().precios, element.payload.doc.data().propina, element.payload.doc.data().total, element.payload.doc.id);
         this.listadoPedidos.push(pedido);
         if (pedido.estado != 'cerrado')
           this.listadoPedidosNoCerrados.push(pedido);
@@ -93,7 +93,6 @@ export class ListadoPedidosComponent implements OnInit {
             this.usuarioBDActivoTIPO = this.usuarioBDActivo.tipo;
             this.usuarioBDActivoMESA = this.usuarioBDActivo.enMesa;
 
-            this.pedidosDelCliente = this.listadoPedidosNoCerrados.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
             this.pedidosDelCliente = this.listadoPedidosNoCerrados.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
           }
         }
