@@ -45,45 +45,15 @@ export class CuentaComponent implements OnInit {
             this.usuarioBDActivoTIPO = this.usuarioBDActivo.tipo;
             this.usuarioBDActivoID = this.usuarioBDActivo.id;
             this.usuarioBDActivoMESA = this.usuarioBDActivo.enMesa;
-
-            // this.pedidosDelCliente = this.listadoPedidosRecibidos.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
-
             console.log("cargo usuario");
 
           }
         }
       });
 
-      // }).finally(() => {
-      //   console.log("ENTRA");
-
-      //   if (this.listadoPedidosRecibidos)
-      //     this.pedidosDelCliente = this.listadoPedidosRecibidos.filter(pedido => pedido.mesa == this.usuarioBDActivoMESA);
-      //   this.pedidosDelCliente.forEach(pedidoCli => {
-      //     this.totalPedido.push(pedidoCli.total);
-      //   });
-      //   console.log(this.listadoPedidosRecibidos);
-      //     console.log(this.pedidosDelCliente);
 
     });
 
-    // let pedido: Pedido;
-    // firestore.getPedidos().subscribe((resp: any) => {
-    //   this.listadoPedidos = [];
-    //   this.listadoPedidosRecibidos = [];
-    //   this.pedidosDelCliente = [];
-    //   for (let index = 0; index < resp.length; index++) {
-    //     const element = resp[index];
-    //     pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().precios, element.payload.doc.data().propina, element.payload.doc.data().total, element.payload.doc.id);
-    //     this.listadoPedidos.push(pedido);
-
-    //     console.log(this.listadoPedidos);
-
-    //     if (pedido.estado == 'recibido')
-    //       this.listadoPedidosRecibidos.push(pedido);
-
-    //   }
-    // });
 
     this.actualizarPedidos();
 
@@ -115,10 +85,6 @@ export class CuentaComponent implements OnInit {
           const element = resp[index];
           pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().precios, element.payload.doc.data().propina, element.payload.doc.data().total, element.payload.doc.id);
 
-          // this.listadoPedidos.push(pedido);
-
-          // console.log(this.listadoPedidos);
-
           if (pedido.estado == 'recibido')
             this.listadoPedidosRecibidos.push(pedido);
 
@@ -129,14 +95,6 @@ export class CuentaComponent implements OnInit {
 
   }
 
-
-  // countCharges(uId, barcodeId){
-  //   return new Promise<any>((resolve) => {
-  //     this.firebaseService.getAll(this.chargesCollection, ref => ref.where("user", "==", uId).where("id", "==", barcodeId)).subscribe((docs: Array<any>) => {
-  //       resolve(docs.length);
-  //     })
-  //   })
-  // }
 
 
   ngOnInit() { }
@@ -173,8 +131,8 @@ export class CuentaComponent implements OnInit {
 
   pagar(pedido) {
     pedido.estado = "pagado";
-    Swal.fire('Muchas gracias','El pago ha sido realizado','success');
     this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(()=>{
+      Swal.fire('Muchas gracias','El pago ha sido realizado','success').then(()=>this.navCtrl.navigateBack('/home'));
       console.log("pagado");
     });
     

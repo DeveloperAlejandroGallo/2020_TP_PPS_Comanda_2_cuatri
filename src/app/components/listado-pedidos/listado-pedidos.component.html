@@ -84,6 +84,11 @@
                     <ion-icon name="arrow-redo-outline"></ion-icon>
                   </ion-button>
                 </ion-col>
+                <ion-col *ngIf="pedido.estado == 'pagado'" size="2">
+                  <ion-button id="finalizar" size="small" color="success" (click)="cerrar(pedido)">
+                    <ion-icon name="logo-usd"></ion-icon>
+                  </ion-button>
+                </ion-col>
 
               </ion-row>
 

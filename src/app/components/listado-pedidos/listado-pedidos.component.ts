@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Mesa } from 'src/app/models/mesa';
 import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
@@ -17,6 +18,7 @@ export class ListadoPedidosComponent implements OnInit {
   public listadoProductos = [];
   public listadoBebidas = [];
   public listadoPlatos = [];
+  public listadoMesas = [];
 
   public listadoPedidos = [];
   public listadoPedidosNoCerrados = [];
@@ -57,6 +59,17 @@ export class ListadoPedidosComponent implements OnInit {
           this.listadoPlatos.push(producto);
       }
       console.log("cargo productos");
+    });
+
+    let mesa: Mesa;
+    firestore.getMesas().subscribe((resp: any) => {
+      this.listadoMesas=[];
+      for (let index = 0; index < resp.length; index++) {
+        const element = resp[index];
+        mesa = new Mesa(element.payload.doc.data().comensales, element.payload.doc.data().estado, element.payload.doc.data().numero, element.payload.doc.data().tipo, element.payload.doc.id, element.payload.doc.data().cliente, element.payload.doc.data().consulta);
+        this.listadoMesas.push(mesa);
+      }
+      console.log("cargo mesas");
     });
 
 
@@ -223,6 +236,23 @@ export class ListadoPedidosComponent implements OnInit {
     Swal.fire('Muchas gracias','Se confirmó la recepción del pedido','success');
     this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
       console.log("recibido");
+    });
+  }
+  
+  cerrar(pedido){
+    pedido.estado='cerrado';
+
+    let mesaA = this.listadoMesas.filter(mesaa => mesaa.id == pedido.mesa);
+    mesaA[0].estado = "libre";
+    mesaA[0].cliente = null;
+    mesaA[0].consulta = null;
+    
+    Swal.fire('Muchas gracias','Finalizo la gestión del pedido. La mesa quedará libre.','success');
+    this.firestore.updateBD(pedido.id,pedido.toJson(),'pedidos').then(resp=>{
+      console.log("cerrado");
+      this.firestore.updateBD(mesaA[0].id,mesaA[0].toJson(),'mesas').then(()=>{
+        console.log("liberada");
+      })
     });
   }
 
