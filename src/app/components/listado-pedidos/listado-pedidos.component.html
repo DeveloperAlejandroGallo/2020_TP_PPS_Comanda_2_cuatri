@@ -16,7 +16,7 @@
 
           <ion-row>
             <ion-col
-              *ngIf="listadoProductosPedidosPorTipo == '' && usuarioBDActivoTIPO != 'mozo' || listadoPedidosNoCerrados == '' && usuarioBDActivoTIPO == 'mozo' "
+              *ngIf="listadoProductosPedidosPorTipo == []  && usuarioBDActivoTIPO != 'mozo' || listadoPedidosNoCerrados == [] && usuarioBDActivoTIPO == 'mozo' "
               size="12">
               <p>Aún no hay pedidos que requieran atención por parte del {{usuarioBDActivoTIPO}}.</p>
             </ion-col>
