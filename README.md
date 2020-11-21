@@ -110,4 +110,4 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >* Cocinero: Finalización de pedidos.
 >* Mozo: Entrega del pedido.
 >* Mozo: Acepta pago y libera mesa.
->>>>>>> develop
+
