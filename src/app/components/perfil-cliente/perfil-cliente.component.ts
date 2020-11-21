@@ -78,8 +78,8 @@ export class PerfilClienteComponent implements OnInit {
 
 
   escanear() {
-    // this.barcode.scan(this.options).then(barcodeData => {
-    //   this.qrLeido = barcodeData.text;
+    this.barcode.scan(this.options).then(barcodeData => {
+      this.qrLeido = barcodeData.text;
 
       this.qrLeido = "mesa2";
 
@@ -119,7 +119,7 @@ export class PerfilClienteComponent implements OnInit {
         }
       }
 
-    // });
+    });
   }
 
 
