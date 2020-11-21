@@ -73,7 +73,7 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >* Diseño de las pantallas y creación de Iconos para Clientes, Empleados y Dueño
 =======
 
-### Semana 4: Sábado 07/10 al 14/10 💻
+### Semana 4: Sábado 07/11 al 14/11 💻
 >**Alejandro Gallo**
 >* Creación del cliente anónimo.
 >* Validación de campos en registro cliente.
@@ -91,7 +91,7 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >* Alta de nuevo plato.
 >* Listado de productos (platos y bebidas).
 
-### Semana 5: Sábado 14/10 al 21/10 💻
+### Semana 5: Sábado 14/11 al 21/11 💻
 >**Alejandro Gallo**
 >* Listado de mesas y estados.
 >* Consulta al mozo del lado del mozo.
