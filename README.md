@@ -14,7 +14,7 @@ Milagros Pielvitori
 
 ## **Nuestro Logo** ✒️
 ![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icon.png)
-![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif)
+![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif | width=70)
 
 
 
