@@ -13,9 +13,7 @@ Milagros Pielvitori
 ```
 
 ## **Nuestro Logo** ✒️
-![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icono.png)
-<!-- ![](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif | width=70) -->
-<img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif"  height="450" />
+![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icono.png)     <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif"  height="450" />
 
 
 ## **Detalles de la construcción** 🛠️
