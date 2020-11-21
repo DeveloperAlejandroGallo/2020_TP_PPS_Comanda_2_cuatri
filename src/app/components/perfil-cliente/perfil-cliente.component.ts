@@ -81,7 +81,7 @@ export class PerfilClienteComponent implements OnInit {
     this.barcode.scan(this.options).then(barcodeData => {
       this.qrLeido = barcodeData.text;
 
-      this.qrLeido = "mesa2";
+      // this.qrLeido = "mesa2";
 
       switch (this.qrLeido) {
         case "ingreso": {
