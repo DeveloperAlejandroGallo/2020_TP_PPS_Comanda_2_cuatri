@@ -135,8 +135,8 @@ export class LogInComponent implements OnInit {
   cargarUser(tipo) {
     switch (tipo) {
       case 'User1': {
-        this.usuario = 'admin@admin.com';
-        this.clave = '111111';
+        this.usuario = 'encuarentenadospps@admin.com';
+        this.clave = '123456';
         break;
       }
       case 'User2': {
