@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
@@ -9,10 +7,16 @@ const routes: Routes = [
   {path: 'home',loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),canActivate:[AuthGuard]},
   {path: 'splash',loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)},
   {path: 'login',loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)},
-  {
-    path: 'register/:perfil',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
+  {path: 'register/:perfil',loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)},
+  {path: 'surveys',loadChildren: () => import('./pages/surveys/surveys.module').then( m => m.SurveysPageModule)},
+  {path: 'create/:producto',loadChildren: () => import('./pages/create/create.module').then( m => m.CreatePageModule)},
+  {path: 'listing/:tipoList',loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)},
+  {path: 'client',loadChildren: () => import('./pages/client/client.module').then( m => m.ClientPageModule)},
+  {path: 'bill',loadChildren: () => import('./pages/bill/bill.module').then( m => m.BillPageModule)},
+
+
+
+
 
 
 

@@ -12,10 +12,16 @@ Matias Paverini
 Milagros Pielvitori
 ```
 
+<<<<<<< HEAD
 ## **Nuestro SplashScreen** 🤳
 ![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/splash.gif)
 
 # Como Operarar
+=======
+## **Nuestro Logo** ✒️
+<!-- ![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icono.png) -->
+<img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif"  height="500" />
+>>>>>>> develop
 
 ## **Ingreso al Local**
 ## ***Alta de Cliente Anónimo***
@@ -62,5 +68,46 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >**Milagros Pielvitori**
 >* Agrega QR para lectura de DNI en alta de empleado.
 >* Agrega filtro para tipo de empleados.
+<<<<<<< HEAD
 >* Lectura y Maneja de la lista de epera mediante QR
 >* Diseño de las pantallas y creación de Iconos para Clientes, Empleados y Dueño
+=======
+
+### Semana 4: Sábado 07/10 al 14/10 💻
+>**Alejandro Gallo**
+>* Creación del cliente anónimo.
+>* Validación de campos en registro cliente.
+>* Validación de ingreso a la aplicación sin estar aprobado por el dueño.
+>* Asignación de mesa por parte del metre.
+>
+>**Matías Paverini**
+>* Listado de clientes pendientes de aprobación desde el perfil del dueño.
+>* Aprobación y rechazo de clientes pendientes de aprobación.
+>* Manejo del QR de ingreso al local.
+>* Alta de nueva bebida.
+>
+>**Milagros Pielvitori**
+>* Manejo del QR para la mesa del cliente.
+>* Alta de nuevo plato.
+>* Listado de productos (platos y bebidas).
+
+### Semana 5: Sábado 14/10 al 21/10 💻
+>**Alejandro Gallo**
+>* Listado de mesas y estados.
+>* Consulta al mozo del lado del mozo.
+>* Asignación de cada tipo de plato a un distinto empleado.
+>* Solicitud de cuenta por parte del cliente.
+>
+>**Matías Paverini**
+>* Consulta al mozo del lado del cliente.
+>* Encuesta empleado.
+>* Bartender: Finalización de pedidos.
+>* Cliente: Recepción del pedido.
+>
+>**Milagros Pielvitori**
+>* Pedido, se le agrega al listado de productos.
+>* Encuesta cliente.
+>* Cocinero: Finalización de pedidos.
+>* Mozo: Entrega del pedido.
+>* Mozo: Acepta pago y libera mesa.
+>>>>>>> develop

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthenticationService {
   }
 
   public registrarCuenta(email:string,pass:string){
-    return this.auth.createUserWithEmailAndPassword(email,pass);
+      console.log(email,pass);
+      return this.auth.createUserWithEmailAndPassword(email,pass);
    }
 
   public cerrarSesion(){
