@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: "737699765257",
     appId: "1:737699765257:web:2130d4d662101e27232cd8"
   },
-  urlVerify:"http://localhost:8100"
+  urlVerify:"https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/README.md"
 };
 
 /*
