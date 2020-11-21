@@ -95,23 +95,23 @@ export class LogInComponent implements OnInit {
       
       // DESCOMENTAR cuando carguemos datos reales y borrar las dos lineas de acá abajo
 
-      // console.log(resp);
-      // this.router.navigate(['/home']);    
-      if(resp.user.emailVerified){
-        console.log(resp);
-        this.router.navigate(['/home']);
+      console.log(resp);
+      this.router.navigate(['/home']);    
+      // if(resp.user.emailVerified){
+      //   console.log(resp);
+      //   this.router.navigate(['/home']);
 
-      }else{
+      // }else{
 
-        this.authService.cerrarSesion().then(res=>{});
-        this.mensaje = "Falta verificar el correo. Ingrese a su casilla o revise en Correo No Deseado.";
-        this.mostrar = true;
-        setTimeout(() => {
-          this.mostrar = false;
-        }, 2500);
+      //   this.authService.cerrarSesion().then(res=>{});
+      //   this.mensaje = "Falta verificar el correo. Ingrese a su casilla o revise en Correo No Deseado.";
+      //   this.mostrar = true;
+      //   setTimeout(() => {
+      //     this.mostrar = false;
+      //   }, 2500);
 
 
-      }
+      // }
 
 
     }).catch(error => {

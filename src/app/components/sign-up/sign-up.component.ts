@@ -98,6 +98,7 @@ export class SignUpComponent implements OnInit {
       }
 
       this.auth.registrarCuenta(this.usuario, this.clave).then(res => {
+        console.log(res);
         if (this.tipo != 'anonimo')
           res.user.sendEmailVerification({ handleCodeInApp: true, url: environment.urlVerify });
 
@@ -114,11 +115,14 @@ export class SignUpComponent implements OnInit {
           }
           ).then(result => {
 
-            if (this.tipo == 'anonimo')
+            if (this.tipo == 'anonimo'){
+
               this.auth.iniciarSesion(this.usuario,this.clave).then(respue=>{
                 console.log("inicio sesion anonimo");
+                this.router.navigate(['/home']);
               });
-              this.router.navigate(['/home']);
+            }
+              this.router.navigate(['/login']);
 
           });
           // this.mostrarNotificacion(true,'El usuario fue dado de alta correctamente');
