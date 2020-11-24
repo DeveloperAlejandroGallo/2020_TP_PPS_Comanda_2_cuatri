@@ -31,6 +31,8 @@ export class ListadoPedidosComponent implements OnInit {
   
   public listProductosPorPedido = [];
   
+  public listadoUsuarios = Array<Usuario>();
+
   public usuarioActivoCorreo;
   public usuarioBDActivo;
   public usuarioBDActivoTIPO;
@@ -71,7 +73,6 @@ export class ListadoPedidosComponent implements OnInit {
       }
       console.log("cargo mesas");
     });
-
 
     let pedido: Pedido;
     firestore.getPedidos().subscribe((resp: any) => {
@@ -243,6 +244,9 @@ export class ListadoPedidosComponent implements OnInit {
     pedido.estado='cerrado';
 
     let mesaA = this.listadoMesas.filter(mesaa => mesaa.id == pedido.mesa);
+    let usuario = mesaA[0].cliente;
+    
+    usuario.mesa = null;
     mesaA[0].estado = "libre";
     mesaA[0].cliente = null;
     mesaA[0].consulta = null;
@@ -252,6 +256,9 @@ export class ListadoPedidosComponent implements OnInit {
       console.log("cerrado");
       this.firestore.updateBD(mesaA[0].id,mesaA[0].toJson(),'mesas').then(()=>{
         console.log("liberada");
+      this.firestore.updateBD(usuario.id,usuario.toJson(),'usuarios').then(()=>{
+        console.log("cliente desasignado.");
+        })
       })
     });
   }
