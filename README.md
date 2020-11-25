@@ -12,25 +12,24 @@ Matias Paverini
 Milagros Pielvitori
 ```
 
-<<<<<<< HEAD
-## **Nuestro SplashScreen** 🤳
-![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/splash.gif)
-
-# Como Operarar
-=======
 ## **Nuestro Logo** ✒️
 <!-- ![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/icono.png) -->
 <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif"  height="500" />
->>>>>>> develop
 
-## **Ingreso al Local**
-## ***Alta de Cliente Anónimo***
-Una vez ingresado como anónimo permitira escanear el QR de la lista de espera
+
+## ***Experiencia Usuario***
+> Le ofrecemos a nuestros clientes tanto la posiblidad de de registrarse cargando todos sus datos (incluso mediante la lectura del QR de su propio DNI) o como cuentas anónimas, simplemente seleccionando un nombre de usuario.
+> El ingreso al local se realiza mediante la lectura de un nuevo código QR, el cual les permitirá acceder a la lista de espera.
+| Cliente Anónimo | Cliente Registrado | Ingreso al Local |
+| ------ | ------ | ------ |
+| <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifRegAnonimo.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifRegAnonimo.gif"  height="500" /> | <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif"  height="500" /> | <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/ingreso.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/ingreso.gif"  height="500" /> |
+
+<!-- Una vez ingresado como anónimo permitira escanear el QR de la lista de espera
 ![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifRegAnonimo.gif)
 
 ## ***Alta de Cliente Registrado***
 El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
-![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif)
+![principal](https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif) -->
 
 ## **Detalles de la construcción** 🛠️
 ### Semana 1: Sábado 17/10 al 24/10 💻
@@ -68,10 +67,8 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >**Milagros Pielvitori**
 >* Agrega QR para lectura de DNI en alta de empleado.
 >* Agrega filtro para tipo de empleados.
-<<<<<<< HEAD
 >* Lectura y Maneja de la lista de epera mediante QR
 >* Diseño de las pantallas y creación de Iconos para Clientes, Empleados y Dueño
-=======
 
 ### Semana 4: Sábado 07/11 al 14/11 💻
 >**Alejandro Gallo**
@@ -111,3 +108,15 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >* Mozo: Entrega del pedido.
 >* Mozo: Acepta pago y libera mesa.
 
+### Semana 6: Sábado 21/11 al 28/11 💻
+>**Alejandro Gallo**
+>* Arreglo detalles.
+>* Grabación del video para entregar.
+>
+>**Matías Paverini**
+>* Notificaciones en perfil del dueño.
+>* Grabación del video para entregar.
+>
+>**Milagros Pielvitori**
+>* Notificaciones en perfiles del empleado.
+>* Grabación del video para entregar.

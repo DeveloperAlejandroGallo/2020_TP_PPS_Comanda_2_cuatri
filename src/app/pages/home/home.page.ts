@@ -26,7 +26,6 @@ export class HomePage {
 
   }
 
-
   recibirPerfil(e){
     this.perfilUsuarioActivo = e;
   }

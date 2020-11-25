@@ -246,7 +246,7 @@ export class ListadoPedidosComponent implements OnInit {
     let mesaA = this.listadoMesas.filter(mesaa => mesaa.id == pedido.mesa);
     let usuario = mesaA[0].cliente;
     
-    usuario.mesa = null;
+    usuario.enMesa = null;
     mesaA[0].estado = "libre";
     mesaA[0].cliente = null;
     mesaA[0].consulta = null;
