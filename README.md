@@ -17,9 +17,11 @@ Milagros Pielvitori
 <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/splash.gif"  height="500" />
 
 
-## ***Experiencia Usuario***
+## **Experiencia Usuario** 💃🏼
 > Le ofrecemos a nuestros clientes tanto la posiblidad de de registrarse cargando todos sus datos (incluso mediante la lectura del QR de su propio DNI) o como cuentas anónimas, simplemente seleccionando un nombre de usuario.
 > El ingreso al local se realiza mediante la lectura de un nuevo código QR, el cual les permitirá acceder a la lista de espera.
+
+
 | Cliente Anónimo | Cliente Registrado | Ingreso al Local |
 | ------ | ------ | ------ |
 | <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifRegAnonimo.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifRegAnonimo.gif"  height="500" /> | <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/main/readMeMedia/gifCliRegistrado.gif"  height="500" /> | <img src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/ingreso.gif" alt="" data-canonical-src="https://github.com/DeveloperAlejandroGallo/2020_TP_PPS_Comanda_2_cuatri/blob/develop/readMeMedia/ingreso.gif"  height="500" /> |
