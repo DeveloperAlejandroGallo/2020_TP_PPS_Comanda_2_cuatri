@@ -12,7 +12,11 @@ const routes: Routes = [
   {path: 'create/:producto',loadChildren: () => import('./pages/create/create.module').then( m => m.CreatePageModule)},
   {path: 'listing/:tipoList',loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)},
   {path: 'client',loadChildren: () => import('./pages/client/client.module').then( m => m.ClientPageModule)},
-  {path: 'bill',loadChildren: () => import('./pages/bill/bill.module').then( m => m.BillPageModule)},
+  {path: 'bill',loadChildren: () => import('./pages/bill/bill.module').then( m => m.BillPageModule)},  {
+    path: 'games',
+    loadChildren: () => import('./pages/games/games.module').then( m => m.GamesPageModule)
+  },
+
 
 
 

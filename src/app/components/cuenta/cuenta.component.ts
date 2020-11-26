@@ -83,7 +83,7 @@ export class CuentaComponent implements OnInit {
         this.pedidosDelCliente = [];
         for (let index = 0; index < resp.length; index++) {
           const element = resp[index];
-          pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().precios, element.payload.doc.data().propina, element.payload.doc.data().total, element.payload.doc.id);
+          pedido = new Pedido(element.payload.doc.data().mesa, element.payload.doc.data().cliente, element.payload.doc.data().productos, element.payload.doc.data().nombres, element.payload.doc.data().estadoProductos, element.payload.doc.data().cantidades, element.payload.doc.data().estado, element.payload.doc.data().precios, element.payload.doc.data().descuento, element.payload.doc.data().propina, element.payload.doc.data().total, element.payload.doc.id);
 
           if (pedido.estado == 'recibido')
             this.listadoPedidosRecibidos.push(pedido);

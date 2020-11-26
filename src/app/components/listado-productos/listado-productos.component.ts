@@ -136,7 +136,7 @@ export class ListadoProductosComponent implements OnInit {
       this.cantidades.push(element.cantidad);
     });
 
-    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.productosPedidosNombre,this.productosPedidosEstados,this.cantidades,'noaprobado',this.productosPedidosPrecio,null,this.totalPedido);
+    let pedido = new Pedido(this.usuarioBDActivo.enMesa,this.usuarioBDActivoID,this.productosPedidosIDs,this.productosPedidosNombre,this.productosPedidosEstados,this.cantidades,'noaprobado',this.productosPedidosPrecio,null,null,this.totalPedido);
     
     this.firestore.savePedidos(pedido.toJson()).then(resp=>{
       Swal.fire('Muchas gracias','Su pedido fue realizado y se está preparando','success').then(()=>this.navCtrl.navigateBack('/home'));

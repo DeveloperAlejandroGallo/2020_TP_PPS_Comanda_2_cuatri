@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
             this.perfilUsuarioActivoMostrar = '';
             this.perfilUsuarioActivo = '';
             this.perfilUsuarioActivo = element.payload.doc.data().perfil;
+            console.log(this.perfilUsuarioActivo);
             this.perfilUsuarioActivoMostrar = element.payload.doc.data().perfil == 'duenio' ? 'Dueño' : element.payload.doc.data().perfil;
             if (element.payload.doc.data().tipo != undefined)
               tipoFormat = element.payload.doc.data().tipo == 'anonimo' ? 'Anónimo' : element.payload.doc.data().tipo;

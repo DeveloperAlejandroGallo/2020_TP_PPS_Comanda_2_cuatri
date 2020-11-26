@@ -117,7 +117,8 @@ export class ClientesComponent implements OnInit {
 
 
   jugar(algo){
-    Swal.fire('Lo sentimos','Aún no hay juegos disponibles','error');
+    this.navCtrl.navigateForward('/games');
+    // Swal.fire('Lo sentimos','Aún no hay juegos disponibles','error');
   }
 
 
