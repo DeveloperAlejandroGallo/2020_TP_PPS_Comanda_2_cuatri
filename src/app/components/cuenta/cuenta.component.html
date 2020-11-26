@@ -39,6 +39,16 @@
               </ion-col>
 
             </ion-row>
+            
+                        <ion-row>
+                          <ion-col size="9">
+                            <p style="color: rgb(19, 19, 85);">Descuento por el juego:</p>
+                          </ion-col>
+                          <ion-col size="3">
+                            <p *ngIf="pedido.descuento != 0 && pedido.descuento != null && pedido.descuento != undefined" style="color: rgb(10, 10, 54);">${{pedido.descuento}}</p>
+                            <p *ngIf="pedido.descuento == 0 || pedido.descuento == null || pedido.descuento == undefined" style="color: rgb(10, 10, 54);">$0</p>
+                          </ion-col>
+                        </ion-row>
 
             <ion-row *ngIf="pedido.propina == null">
               <ion-col size="12">

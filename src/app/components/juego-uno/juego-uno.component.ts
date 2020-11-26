@@ -34,6 +34,7 @@ export class JuegoUnoComponent implements OnInit {
   iniciar() {
     this.iniciado = true;
     this.contador = 0;
+    this.tablaAyudas = [];
     this.generarSecuencia();
   }
 
@@ -53,16 +54,22 @@ export class JuegoUnoComponent implements OnInit {
       if (this.verificarJugada()) { // gano
         this.iniciado = false;
         Swal.fire("Felicidades", "Ganaste el juego de acomodar los dados. Se aplicará un 10% de descuento al precio final de tu pedido", "success");
-        this.gestionarGanador().then(resp=>{
-          if(this.pedidoDelUsuario){
+        this.gestionarGanador().then(resp => {
+          if (this.pedidoDelUsuario) {
+            // calculo descuento del 10%
+            if (this.pedidoDelUsuario.descuento == null || this.pedidoDelUsuario.descuento==0 || this.pedidoDelUsuario.descuento== undefined) {
+              this.pedidoDelUsuario.descuento = this.pedidoDelUsuario.total * 0.10;
+              this.pedidoDelUsuario.total = this.pedidoDelUsuario.total - this.pedidoDelUsuario.descuento;
 
-            
-            this.pedidoDelUsuario.descuento = 10;
-            this.firestore.updateBD(this.pedidoDelUsuario.id,this.pedidoDelUsuario.toJson(),'pedidos').then(res=>{
-              console.log("se aplico 10 al descuento")
-            });
-          }else{
-            Swal.fire("Error","No se aplicará ningún descuento porque no hay pedidos activos. Gracias igualmente por haber jugado.",'info');
+              this.firestore.updateBD(this.pedidoDelUsuario.id, this.pedidoDelUsuario.toJson(), 'pedidos').then(res => {
+                console.log("se aplico 10% al descuento")
+              });
+
+            } else {
+              Swal.fire("Error", "Ya se aplicó una vez el descuento a su pedido. Gracias igualmente por haber jugado.", "warning");
+            }
+          } else {
+            Swal.fire("Error", "No se aplicará ningún descuento porque no hay pedidos activos. Gracias igualmente por haber jugado.", 'info');
           }
         });
       } else {

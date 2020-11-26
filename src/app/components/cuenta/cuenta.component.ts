@@ -49,13 +49,13 @@ export class CuentaComponent implements OnInit {
 
           }
         }
+        this.actualizarPedidos();
       });
 
 
     });
 
 
-    this.actualizarPedidos();
 
 
 
@@ -68,6 +68,8 @@ export class CuentaComponent implements OnInit {
       if (this.listadoPedidosRecibidos)
         this.pedidosDelCliente = this.listadoPedidosRecibidos.filter(pedido => pedido.cliente == this.usuarioBDActivoID);
       console.log(this.pedidosDelCliente);
+      console.log(this.usuarioBDActivoID);
+
     });
   }
 
