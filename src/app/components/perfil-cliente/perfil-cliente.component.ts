@@ -19,7 +19,7 @@ export class PerfilClienteComponent implements OnInit {
   enListaDeEspera = false;
   qrLeido;
 
-  @Output() parametroEnviado : EventEmitter<string> = new EventEmitter<string>();
+  @Output() parametroEnviado: EventEmitter<string> = new EventEmitter<string>();
 
   options: BarcodeScannerOptions = {
     //prompt : "Escaneando", // Android
@@ -81,43 +81,40 @@ export class PerfilClienteComponent implements OnInit {
     // this.barcode.scan(this.options).then(barcodeData => {
     //   this.qrLeido = barcodeData.text;
 
-      this.qrLeido = "mesa3";
+    this.qrLeido = "mesa5";
 
-      switch (this.qrLeido) {
-        case "ingreso": {
-          if (this.usuarioBDActivo.enMesa == null || this.usuarioBDActivo.enMesa == undefined) {
-            if (this.verificaWaitingList()) {
-              this.muestraSwal("Sea paciente", "warning", "Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
-            } else {
-              this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(), this.usuarioBDActivo.id).then(resp => {
-                this.muestraSwal("¡Bienvenido!", "success", "Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
-              }).catch(error => {
-                this.muestraSwal("¡Error!", "error", "No pudo ingresar a la lista de espera. Contacte al dueño.");
-              });
-            }
+    switch (this.qrLeido) {
+      case "ingreso": {
+        if (this.usuarioBDActivo.enMesa == null || this.usuarioBDActivo.enMesa == undefined) {
+          if (this.verificaWaitingList()) {
+            this.muestraSwal("Sea paciente", "warning", "Ya se encuentra en lista de espera. Un metre le asignará una mesa a la brevedad");
           } else {
-            this.muestraSwal("¡Error!", "error", "Ya tiene una mesa asignada. Escanee ese QR, este es el de ingreso al local.");
+            this.firestore.saveListaDeEspera(this.usuarioBDActivo.toJson(), this.usuarioBDActivo.id).then(resp => {
+              this.muestraSwal("¡Bienvenido!", "success", "Ha ingresado en lista de espera. Un metre le asignará una mesa a la brevedad");
+            }).catch(error => {
+              this.muestraSwal("¡Error!", "error", "No pudo ingresar a la lista de espera. Contacte al dueño.");
+            });
           }
-          break;
+        } else {
+          this.muestraSwal("¡Error!", "error", "Ya tiene una mesa asignada. Escanee ese QR, este es el de ingreso al local.");
         }
-        case "encuestas": {
-          break;
-        }
-        default: {
-          if(this.usuarioBDActivo.enMesa != null || this.usuarioBDActivo.enMesa == undefined){
-            var nroMesa = this.qrLeido.substr(-1);
-            if(this.usuarioBDActivo.enMesa != nroMesa){
-              this.muestraSwal('¡Error!','error','Ése no es el QR de su mesa. Escanee el correcto. Su mesa es la número '+ this.usuarioBDActivo.enMesa);
-            }else{
-              this.parametroEnviado.emit('mesaCliente');
-            }
-          } else {
-            this.muestraSwal('¡Atención!','warning','Aún no tiene una mesa asignada. Aguarde o escanee el QR correcto.');
-          }
-
-          break;
-        }
+        break;
       }
+      default: {
+        if (this.usuarioBDActivo.enMesa != null && this.usuarioBDActivo.enMesa != undefined) {
+          var nroMesa = this.qrLeido.substr(-1);
+          if (this.usuarioBDActivo.enMesa != nroMesa) {
+            this.muestraSwal('¡Error!', 'error', 'Ése no es el QR de su mesa. Escanee el correcto. Su mesa es la número ' + this.usuarioBDActivo.enMesa);
+          } else {
+            this.parametroEnviado.emit('mesaCliente');
+          }
+        } else {
+          this.muestraSwal('¡Atención!', 'warning', 'Aún no tiene una mesa asignada. Aguarde o escanee el QR correcto.');
+        }
+
+        break;
+      }
+    }
 
     // });
   }
