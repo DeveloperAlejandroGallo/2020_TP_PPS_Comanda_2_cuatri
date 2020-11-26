@@ -124,7 +124,7 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 
 ### Semana 6: Sábado 21/11 al 28/11 💻
 >**Alejandro Gallo**
->* Arreglo detalles.
+>* Arreglo detalles en alertas y pedidos.
 >* Grabación del video para entregar.
 >
 >**Matías Paverini**
@@ -133,4 +133,5 @@ El cliente puede registrarse con todos sus datos a mano o escaneando su DNI
 >
 >**Milagros Pielvitori**
 >* Notificaciones en perfiles del empleado.
+>* Juego para descuento.
 >* Grabación del video para entregar.
