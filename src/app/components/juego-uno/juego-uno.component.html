@@ -50,7 +50,7 @@
   <ion-card  *ngIf="iniciado" class="ion-text-center card">
 
     <ion-card-header>
-      <ion-card-title>INTENTOS</ion-card-title>
+      <ion-card-title>INTENTOS <ion-button color="warning" (click)="respuesta()"><ion-icon name="help-outline"></ion-icon></ion-button></ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -87,9 +87,10 @@
         </ion-row>
       </ion-grid>
 
+      
     </ion-card-content>
   </ion-card>
-
+  
 
 
 </div>

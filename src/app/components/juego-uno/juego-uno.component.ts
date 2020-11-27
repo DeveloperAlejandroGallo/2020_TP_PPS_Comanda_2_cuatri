@@ -40,6 +40,15 @@ export class JuegoUnoComponent implements OnInit {
 
 
 
+  respuesta(){
+
+    if(this.secuenciasPC != null && this.secuenciasPC != []){
+      Swal.fire("Modo testing","Simplemente a modo de pruebas y para mostrar la funcionalidad se agregó este botón. La secuencia correcta es: "+this.secuenciasPC,"info")
+    }else {
+      Swal.fire("Modo testing","No hay todavía secuencia generada","info");
+    }
+
+  }
 
 
   verificar(color: string) {
