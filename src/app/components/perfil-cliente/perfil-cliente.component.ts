@@ -78,10 +78,10 @@ export class PerfilClienteComponent implements OnInit {
 
 
   escanear() {
-    // this.barcode.scan(this.options).then(barcodeData => {
-    //   this.qrLeido = barcodeData.text;
+    this.barcode.scan(this.options).then(barcodeData => {
+      this.qrLeido = barcodeData.text;
 
-    this.qrLeido = "mesa5";
+    // this.qrLeido = "mesa5";
 
     switch (this.qrLeido) {
       case "ingreso": {
@@ -116,7 +116,7 @@ export class PerfilClienteComponent implements OnInit {
       }
     }
 
-    // });
+    });
   }
 
 
